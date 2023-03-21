@@ -1,77 +1,80 @@
-package at.fhv.tvv.backend.domain.model.veranstaltungsort;
+package at.fhv.tvv.backend.domain.model.event;
+
+import at.fhv.tvv.backend.domain.model.veranstaltungsort.Veranstaltungsort;
+import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-public class Veranstaltungsort {
+public class Event {
 
     @Id
     @GeneratedValue
-    private Long veranstaltungsortIdInternal;
+    private Long eventIdInternal;
 
-    private int ortId;
+    private int eventId;
 
-    private String gebaeude;
+    private String name;
 
-    private String strasse;
+    @ManyToOne
+    private Veranstaltungsserie veranstaltungsserie;
 
-    private String hausnummer;
+    private String beschreibung;
 
-    private int plz;
+    private String datum;
 
-    private String ort;
+    @ManyToOne
+    private Veranstaltungsort veranstaltungsort;
 
-    private String land;
+    private int plaetze;
 
-    private String raum;
-
-    protected Veranstaltungsort() {
+    protected Event() {
 
     }
 
-    public Veranstaltungsort(int ortId, String gebaeude, String strasse, String hausnummer, int plz, String ort, String land, String raum) {
-        this.ortId = ortId;
-        this.gebaeude = gebaeude;
-        this.strasse = strasse;
-        this.hausnummer = hausnummer;
-        this.plz = plz;
-        this.ort = ort;
-        this.land = land;
-        this.raum = raum;
+    public Event(int eventId, String name, Veranstaltungsserie veranstaltungsserie, String beschreibung, String datum, Veranstaltungsort veranstaltungsort, int plaetze) {
+        this.eventId = eventId;
+        this.name = name;
+        this.veranstaltungsserie = veranstaltungsserie;
+        this.beschreibung = beschreibung;
+        this.datum = datum;
+        this.veranstaltungsort = veranstaltungsort;
+        this.plaetze = plaetze;
     }
 
-    public Long getVeranstaltungsortIdInternal() {
-        return veranstaltungsortIdInternal;
+    public int getEventId() {
+        return eventId;
     }
 
-    public int getOrtId() {
-        return ortId;
+
+    public String getName() {
+        return name;
     }
 
-    public String getGebaeude() {
-        return gebaeude;
+
+    public Veranstaltungsserie getVeranstaltungsserie() {
+        return veranstaltungsserie;
     }
 
-    public String getStrasse() {
-        return strasse;
+
+    public String getBeschreibung() {
+        return beschreibung;
     }
 
-    public String getHausnummer() {
-        return hausnummer;
+
+    public String getDatum() {
+        return datum;
     }
 
-    public int getPlz() {
-        return plz;
+
+    public Veranstaltungsort getVeranstaltungsort() {
+        return veranstaltungsort;
     }
 
-    public String getOrt() {
-        return ort;
+
+    public int getPlaetze() {
+        return plaetze;
     }
 
-    public String getLand() {
-        return land;
-    }
-
-    public String getRaum() {
-        return raum;
-    }
 }
