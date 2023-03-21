@@ -6,8 +6,9 @@
     <persistence-unit name="Factory">
         <description>Hibernate EntityManager</description>
 
+        <class>at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie</class>
         <class>at.fhv.tvv.backend.domain.model.veranstaltungsort.Veranstaltungsort</class>
-
+        <class>at.fhv.tvv.backend.domain.model.event.Event</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
