@@ -2,6 +2,7 @@ package at.fhv.tvv.backend.infrastructure;
 
 import at.fhv.tvv.backend.HibernateService;
 import at.fhv.tvv.backend.domain.model.event.Event;
+import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 
 import javax.persistence.EntityManager;
@@ -26,4 +27,14 @@ public class EventRepositoryImpl implements EventRepository {
                 .setParameter(2, searchDate2)
                 .getResultList();
     }
+
+    public List<Event> searchByCategory(String searchString) {
+        Kategorie kategorie = Kategorie.valueOf(searchString);
+        return entityManager
+                .createQuery("SELECT e FROM Event e WHERE e.veranstaltungsserie.kategorie=(?1)", Event.class)
+                .setParameter(1, kategorie)
+                .getResultList();
+    }
+
+
 }

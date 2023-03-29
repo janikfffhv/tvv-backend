@@ -47,4 +47,19 @@ public class EventSearchImpl implements EventSearch {
                         event.getPlaetze()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<EventSearchDTO> searchByCategory(String searchString) {
+        return eventRepository
+                .searchByCategory(searchString)
+                .stream()
+                .map(event -> new EventSearchDTO(
+                        event.getEventId(),
+                        event.getName(),
+                        event.getVeranstaltungsserie().getName(),
+                        event.getDatum(),
+                        event.getVeranstaltungsort().getOrt(),
+                        event.getPlaetze()))
+                .collect(Collectors.toList());
+    }
 }
