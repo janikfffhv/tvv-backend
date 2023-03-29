@@ -19,10 +19,11 @@ public class EventRepositoryImpl implements EventRepository {
                 .getResultList();
     }
 
-    public List<Event> searchByDate(String searchDate) {
+    public List<Event> searchByDate(int searchDate1, int searchDate2) {
         return entityManager
-                .createQuery("SELECT e FROM Event e WHERE LOWER(e.datum) LIKE LOWER(?1)", Event.class)
-                .setParameter(1, searchDate)
+                .createQuery("SELECT e FROM Event e WHERE LOWER(e.datum) BETWEEN (?1) AND (?2)", Event.class)
+                .setParameter(1, searchDate1)
+                .setParameter(2, searchDate2)
                 .getResultList();
     }
 }

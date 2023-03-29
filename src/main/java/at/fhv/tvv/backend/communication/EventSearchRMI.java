@@ -22,7 +22,7 @@ public class EventSearchRMI extends UnicastRemoteObject implements EventSearch {
     }
 
     @Override
-    public List<EventSearchDTO> searchByDate(String searchDate) throws RemoteException {
-        return eventSearch.searchByDate(searchDate);
+    public List<EventSearchDTO> searchByDate(int searchDate1, int searchDate2) throws RemoteException {
+        return eventSearch.searchByDate(searchDate1, searchDate2);
     }
 }

@@ -10,6 +10,7 @@ public class RMIServer {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 
             Naming.rebind("rmi://localhost/eventSearch", HibernateService.eventSearchRMI());
+            Naming.rebind("rmi://localhost/customerSearch", HibernateService.customerSearchRMI());
 
         } catch (Exception e) {
             e.printStackTrace();

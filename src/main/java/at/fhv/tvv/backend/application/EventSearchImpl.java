@@ -34,9 +34,9 @@ public class EventSearchImpl implements EventSearch {
     }
 
     @Override
-    public List<EventSearchDTO> searchByDate(String searchDate) {
+    public List<EventSearchDTO> searchByDate(int searchDate1, int searchDate2) {
         return eventRepository
-                .searchByDate(searchDate)
+                .searchByDate(searchDate1, searchDate2)
                 .stream()
                 .map(event -> new EventSearchDTO(
                         event.getEventId(),

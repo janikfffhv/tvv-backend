@@ -1,8 +1,10 @@
 package at.fhv.tvv.backend;
 import at.fhv.tvv.backend.application.EventSearchImpl;
+import at.fhv.tvv.backend.communication.CustomerSearchRMI;
 import at.fhv.tvv.backend.communication.EventSearchRMI;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
+import at.fhv.tvv.shared.rmi.CustomerSearch;
 import at.fhv.tvv.shared.rmi.EventSearch;
 
 import javax.persistence.EntityManager;
@@ -16,6 +18,8 @@ public class HibernateService {
 
     private static EventSearch eventSearchImpl;
     private static EventSearch eventSearchRMI;
+
+    private static CustomerSearch customerSearchRMI;
     public static EntityManager entityManager() {
         if (entityManager == null) {
             entityManager = Persistence.createEntityManagerFactory("Factory").createEntityManager();
@@ -43,5 +47,12 @@ public class HibernateService {
             eventSearchRMI = new EventSearchRMI(eventSearchImpl());
         }
         return eventSearchRMI;
+    }
+
+    public static CustomerSearch customerSearchRMI() throws RemoteException {
+        if(customerSearchRMI == null) {
+            customerSearchRMI = new CustomerSearchRMI();
+        }
+        return customerSearchRMI;
     }
 }

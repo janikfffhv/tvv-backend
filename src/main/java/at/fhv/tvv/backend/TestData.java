@@ -25,7 +25,7 @@ public class TestData {
         Veranstaltungsserie generell = new Veranstaltungsserie("Generelle Serie", "Dies ist eine normale Serie", Kategorie.KONZERT, "TestVeranstalter");
         veranstaltungsserien.add(generell);
 
-        Event event1 = new Event(1001, "Testevent", generell, "Dies ist ein Testevent", "22.03.2023", dornbirn, 100);
+        Event event1 = new Event(1001, "Testevent", generell, "Dies ist ein Testevent", 1679443200, dornbirn, 100);
         events.add(event1);
 
         EntityManager manager = HibernateService.entityManager();

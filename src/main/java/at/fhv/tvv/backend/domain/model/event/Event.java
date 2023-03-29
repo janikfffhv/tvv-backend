@@ -22,7 +22,7 @@ public class Event {
 
     private String beschreibung;
 
-    private String datum;
+    private int datum;
 
     @ManyToOne
     private Veranstaltungsort veranstaltungsort;
@@ -33,7 +33,7 @@ public class Event {
 
     }
 
-    public Event(int eventId, String name, Veranstaltungsserie veranstaltungsserie, String beschreibung, String datum, Veranstaltungsort veranstaltungsort, int plaetze) {
+    public Event(int eventId, String name, Veranstaltungsserie veranstaltungsserie, String beschreibung, int datum, Veranstaltungsort veranstaltungsort, int plaetze) {
         this.eventId = eventId;
         this.name = name;
         this.veranstaltungsserie = veranstaltungsserie;
@@ -63,7 +63,7 @@ public class Event {
     }
 
 
-    public String getDatum() {
+    public int getDatum() {
         return datum;
     }
 

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EventRepository {
     List<Event> searchByString (String searchString);
-    List<Event> searchByDate (String searchDate);
+    List<Event> searchByDate (int searchDate1, int SearchDate2);
 }
