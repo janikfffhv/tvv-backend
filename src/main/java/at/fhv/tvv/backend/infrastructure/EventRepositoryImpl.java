@@ -22,7 +22,7 @@ public class EventRepositoryImpl implements EventRepository {
 
     public List<Event> searchByDate(int searchDate1, int searchDate2) {
         return entityManager
-                .createQuery("SELECT e FROM Event e WHERE LOWER(e.datum) BETWEEN (?1) AND (?2)", Event.class)
+                .createQuery("SELECT e FROM Event e WHERE e.datum BETWEEN (?1) AND (?2)", Event.class)
                 .setParameter(1, searchDate1)
                 .setParameter(2, searchDate2)
                 .getResultList();
