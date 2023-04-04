@@ -36,5 +36,12 @@ public class EventRepositoryImpl implements EventRepository {
                 .getResultList();
     }
 
+    public Event searchById(int eventId) {
+        return entityManager
+                .createQuery("SELECT e FROM Event e WHERE e.eventId=(?1)", Event.class)
+                .setParameter(1, eventId)
+                .getSingleResult();
+    }
+
 
 }

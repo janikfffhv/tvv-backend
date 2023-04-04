@@ -1,5 +1,6 @@
 package at.fhv.tvv.backend.communication;
 
+import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
 import at.fhv.tvv.shared.rmi.EventSearch;
 
@@ -29,5 +30,10 @@ public class EventSearchRMI extends UnicastRemoteObject implements EventSearch {
     @Override
     public List<EventSearchDTO> searchByCategory(String searchString) throws RemoteException {
         return eventSearch.searchByCategory(searchString);
+    }
+
+    @Override
+    public EventDescriptionDTO searchById(int searchId) throws RemoteException {
+        return eventSearch.searchById(searchId);
     }
 }

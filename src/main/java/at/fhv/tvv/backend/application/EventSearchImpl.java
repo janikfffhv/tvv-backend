@@ -1,7 +1,9 @@
 package at.fhv.tvv.backend.application;
 
+import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
+import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
 import at.fhv.tvv.shared.rmi.EventSearch;
 
@@ -61,5 +63,19 @@ public class EventSearchImpl implements EventSearch {
                         event.getVeranstaltungsort().getOrt(),
                         event.getPlaetze()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+
+    public EventDescriptionDTO searchById(int eventId) {
+        Event event = eventRepository.searchById(eventId);
+        return new EventDescriptionDTO(event.getEventId(),
+                event.getName(),
+                event.getVeranstaltungsserie().getName(),
+                event.getDatum(),
+                event.getVeranstaltungsort().getOrt(),
+                event.getBeschreibung(),
+                event.getPlaetze());
+
     }
 }
