@@ -1,6 +1,7 @@
 package at.fhv.tvv.backend.application;
 
 import at.fhv.tvv.backend.domain.model.event.Event;
+import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.shared.dto.EventDescriptionDTO;
@@ -19,6 +20,16 @@ public class EventSearchImpl implements EventSearch {
         this.eventRepository = eventRepository;
     }
 
+    public int countVerfuegbar(List<Platz> plaetze) {
+        int count = 0;
+        for(Platz platz:plaetze) {
+            System.out.println(platz.getVerkauf());
+            if(platz.getVerkauf()==null) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     @Override
     public List<EventSearchDTO> searchByString(String searchString) {
@@ -31,7 +42,8 @@ public class EventSearchImpl implements EventSearch {
                         event.getVeranstaltungsserie().getName(),
                         event.getDatum(),
                         event.getVeranstaltungsort().getOrt(),
-                        event.getPlaetze()))
+                        event.getPlaetze().size(),
+                        countVerfuegbar(event.getPlaetze())))
                 .collect(Collectors.toList());
     }
 
@@ -40,13 +52,16 @@ public class EventSearchImpl implements EventSearch {
         return eventRepository
                 .searchByDate(searchDate1, searchDate2)
                 .stream()
-                .map(event -> new EventSearchDTO(
-                        event.getEventId(),
-                        event.getName(),
-                        event.getVeranstaltungsserie().getName(),
-                        event.getDatum(),
-                        event.getVeranstaltungsort().getOrt(),
-                        event.getPlaetze()))
+                .map(event ->
+                    new EventSearchDTO(
+                            event.getEventId(),
+                            event.getName(),
+                            event.getVeranstaltungsserie().getName(),
+                            event.getDatum(),
+                            event.getVeranstaltungsort().getOrt(),
+                            event.getPlaetze().size(),
+                            countVerfuegbar(event.getPlaetze()))
+                )
                 .collect(Collectors.toList());
     }
 
@@ -61,7 +76,8 @@ public class EventSearchImpl implements EventSearch {
                         event.getVeranstaltungsserie().getName(),
                         event.getDatum(),
                         event.getVeranstaltungsort().getOrt(),
-                        event.getPlaetze()))
+                        event.getPlaetze().size(),
+                        countVerfuegbar(event.getPlaetze())))
                 .collect(Collectors.toList());
     }
 
@@ -72,10 +88,17 @@ public class EventSearchImpl implements EventSearch {
         return new EventDescriptionDTO(event.getEventId(),
                 event.getName(),
                 event.getVeranstaltungsserie().getName(),
+                event.getVeranstaltungsserie().getVeranstalter(),
+                event.getVeranstaltungsserie().getKategorie().getName(),
                 event.getDatum(),
+                event.getVeranstaltungsort().getGebaeude(),
+                event.getVeranstaltungsort().getStrasse(),
+                event.getVeranstaltungsort().getHausnummer(),
+                event.getVeranstaltungsort().getPlz(),
                 event.getVeranstaltungsort().getOrt(),
+                event.getVeranstaltungsort().getRaum(),
                 event.getBeschreibung(),
-                event.getPlaetze());
+                event.getPlaetze().size());
 
     }
 }

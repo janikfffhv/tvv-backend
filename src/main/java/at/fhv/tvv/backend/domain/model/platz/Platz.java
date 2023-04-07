@@ -1,5 +1,10 @@
 package at.fhv.tvv.backend.domain.model.platz;
 
+import at.fhv.tvv.backend.domain.model.event.Event;
+import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,20 +23,24 @@ public class Platz {
     @Enumerated(EnumType.STRING)
     private Kategorie kategorie;
 
-    private int eventId;
-
     private float preis;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Event event;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @NotFound(action=NotFoundAction.IGNORE)
+    private Verkauf verkauf;
 
     protected Platz() {
 
     }
 
-    public Platz(int platzId, int nummer, int reihe, Kategorie kategorie, int eventId, float preis) {
+    public Platz(int platzId, int nummer, int reihe, Kategorie kategorie, float preis) {
         this.platzId = platzId;
         this.nummer = nummer;
         this.reihe = reihe;
         this.kategorie = kategorie;
-        this.eventId = eventId;
         this.preis = preis;
     }
 
@@ -55,11 +64,21 @@ public class Platz {
         return kategorie;
     }
 
-    public int getEventId() {
-        return eventId;
-    }
-
     public float getPreis() {
         return preis;
     }
+
+    public Event getEvent() { return event; }
+
+    public Verkauf getVerkauf() { return verkauf; }
+
+    public void setVerkauf(Verkauf verkauf) {
+        this.verkauf = verkauf;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+
 }

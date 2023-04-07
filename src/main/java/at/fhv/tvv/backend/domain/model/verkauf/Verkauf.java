@@ -1,7 +1,11 @@
 package at.fhv.tvv.backend.domain.model.verkauf;
 
+import at.fhv.tvv.backend.domain.model.platz.Platz;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,9 +21,12 @@ public class Verkauf {
 
     private float erstattungsbetrag;
 
+    @OneToMany(mappedBy="verkauf")
+    private List<Platz> plaetze = new ArrayList<>();
+
     private UUID kundenId;
 
-    private Date verkaufszeit;
+    private String verkaufszeit;
 
     @Enumerated(EnumType.STRING)
     private Zahlungsmethode zahlungsmethode;
@@ -30,7 +37,7 @@ public class Verkauf {
 
     }
 
-    public Verkauf(UUID verkaufsId, float gesamtpreis, float erstattungsbetrag, UUID kundenId, Date verkaufszeit, Zahlungsmethode zahlungsmethode, String angestellter) {
+    public Verkauf(UUID verkaufsId, float gesamtpreis, float erstattungsbetrag, UUID kundenId, String verkaufszeit, Zahlungsmethode zahlungsmethode, String angestellter) {
         this.verkaufsId = verkaufsId;
         this.gesamtpreis = gesamtpreis;
         this.erstattungsbetrag = erstattungsbetrag;
@@ -60,7 +67,7 @@ public class Verkauf {
         return kundenId;
     }
 
-    public Date getVerkaufszeit() {
+    public String getVerkaufszeit() {
         return verkaufszeit;
     }
 
@@ -70,5 +77,12 @@ public class Verkauf {
 
     public String getAngestellter() {
         return angestellter;
+    }
+
+    public List<Platz> getPlaetze() { return plaetze; }
+
+    public void addPlatz(Platz platz) {
+        plaetze.add(platz);
+        platz.setVerkauf(this);
     }
 }

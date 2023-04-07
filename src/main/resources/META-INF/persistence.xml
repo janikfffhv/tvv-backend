@@ -9,6 +9,8 @@
         <class>at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie</class>
         <class>at.fhv.tvv.backend.domain.model.veranstaltungsort.Veranstaltungsort</class>
         <class>at.fhv.tvv.backend.domain.model.event.Event</class>
+        <class>at.fhv.tvv.backend.domain.model.platz.Platz</class>
+        <class>at.fhv.tvv.backend.domain.model.verkauf.Verkauf</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
