@@ -4,7 +4,8 @@ public enum Kategorie {
 
     SITZPLATZ("SITZPLATZ"),
     STEHPLATZ("STEHPLATZ"),
-    VIP("VIP");
+    VIP("VIP"),
+    PLATZ("PLATZ");
 
     private final String name;
 

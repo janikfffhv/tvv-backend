@@ -42,7 +42,7 @@
     <dependency>
         <groupId>com.github.janikfffhv</groupId>
         <artifactId>tvv-shared</artifactId>
-        <version>a865cebd59</version>
+        <version>f9f14756b5</version>
     </dependency>
 </dependencies>
 </project>

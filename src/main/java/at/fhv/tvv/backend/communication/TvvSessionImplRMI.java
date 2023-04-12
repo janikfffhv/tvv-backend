@@ -7,6 +7,7 @@ import at.fhv.tvv.shared.rmi.TvvSession;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
+import java.util.UUID;
 
 public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession {
     private final TvvSessionImpl tvvSession = new TvvSessionImpl();
@@ -18,6 +19,16 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     @Override
     public List<WarenkorbZeileDTO> getWarenkorb() throws RemoteException {
         return tvvSession.getWarenkorb();
+    }
+
+    @Override
+    public UUID getKunde() throws RemoteException {
+        return tvvSession.getKunde();
+    }
+
+    @Override
+    public String getZahlungsMethode() throws RemoteException {
+        return tvvSession.getZahlungsMethode();
     }
 
     @Override
@@ -33,5 +44,16 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     @Override
     public void leeren() throws RemoteException {
         tvvSession.leeren();
+    }
+
+    @Override
+    public void hinzufuegenKunde(UUID uuid) throws RemoteException {
+        tvvSession.hinzufuegenKunde(uuid);
+    }
+
+    @Override
+    public void hinzufuegenZahlungsMethode(String s) throws RemoteException {
+        tvvSession.hinzufuegenZahlungsMethode(s);
+
     }
 }

@@ -6,11 +6,11 @@ import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
+import at.fhv.tvv.shared.dto.PlatzDTO;
 import at.fhv.tvv.shared.rmi.EventSearch;
 
 import java.rmi.RemoteException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class EventSearchImpl implements EventSearch {
@@ -31,8 +31,22 @@ public class EventSearchImpl implements EventSearch {
         return count;
     }
 
+    public List<PlatzDTO> getPlaetze(List<Platz> plaetze) {
+        List<PlatzDTO> plaetzeReturn = new ArrayList<>();
+        for(Platz platz:plaetze) {
+            String verkaufsUUID = "";
+            if(platz.getVerkauf()!=null) {
+                verkaufsUUID = platz.getVerkauf().getVerkaufsId().toString();
+            }
+            PlatzDTO platzDTO = new PlatzDTO(platz.getPlatzId(), platz.getNummer(), platz.getKategorie().toString(), platz.getReihe(), verkaufsUUID, platz.getPreis());
+            plaetzeReturn.add(platzDTO);
+        }
+        return plaetzeReturn;
+    }
+
     @Override
     public List<EventSearchDTO> searchByString(String searchString) {
+        System.out.println("Gegebener String: " + searchString);
         return eventRepository
                 .searchByString(searchString)
                 .stream()
@@ -84,6 +98,7 @@ public class EventSearchImpl implements EventSearch {
     @Override
 
     public EventDescriptionDTO searchById(int eventId) {
+        System.out.println("Gesucht nach: " + eventId);
         Event event = eventRepository.searchById(eventId);
         return new EventDescriptionDTO(event.getEventId(),
                 event.getName(),
@@ -98,7 +113,7 @@ public class EventSearchImpl implements EventSearch {
                 event.getVeranstaltungsort().getOrt(),
                 event.getVeranstaltungsort().getRaum(),
                 event.getBeschreibung(),
-                event.getPlaetze().size());
+                getPlaetze(event.getPlaetze()));
 
     }
 }

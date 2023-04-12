@@ -1,5 +1,7 @@
 package at.fhv.tvv.backend.communication;
 
+import at.fhv.tvv.backend.application.CustomerSearchTicketsImpl;
+import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 import at.fhv.tvv.shared.dto.CustomerSearchDTO;
 import at.fhv.tvv.shared.rmi.CustomerSearch;
 
@@ -10,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 public class CustomerSearchRMI extends UnicastRemoteObject implements CustomerSearch {
-
     public CustomerSearchRMI() throws RemoteException {
         super();
     }

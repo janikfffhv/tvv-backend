@@ -1,14 +1,12 @@
 package at.fhv.tvv.backend;
+import at.fhv.tvv.backend.application.CustomerSearchTicketsImpl;
 import at.fhv.tvv.backend.application.EventSearchImpl;
 import at.fhv.tvv.backend.application.TvvSessionFactoryImpl;
-import at.fhv.tvv.backend.communication.CustomerSearchRMI;
-import at.fhv.tvv.backend.communication.EventSearchRMI;
-import at.fhv.tvv.backend.communication.TvvSessionFactoryRMI;
+import at.fhv.tvv.backend.application.VerkaufImpl;
+import at.fhv.tvv.backend.communication.*;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
-import at.fhv.tvv.shared.rmi.CustomerSearch;
-import at.fhv.tvv.shared.rmi.EventSearch;
-import at.fhv.tvv.shared.rmi.TvvSessionFactory;
+import at.fhv.tvv.shared.rmi.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -22,10 +20,19 @@ public class HibernateService {
     private static EventSearch eventSearchImpl;
     private static EventSearch eventSearchRMI;
 
+    private static Verkauf verkaufImpl;
+    private static Verkauf verkaufImplRMI;
+
     private static CustomerSearch customerSearchRMI;
+
+    private static CustomerTickets customerTickets;
+    private static CustomerTickets customerTicketsRMI;
 
     private static TvvSessionFactory tvvSessionFactoryImpl;
     private static TvvSessionFactory tvvSessionFactoryRMI;
+
+    private static CustomerSearchTicketsImpl customerSearchTickets;
+
     public static EntityManager entityManager() {
         if (entityManager == null) {
             entityManager = Persistence.createEntityManagerFactory("Factory").createEntityManager();
@@ -53,6 +60,34 @@ public class HibernateService {
             eventSearchRMI = new EventSearchRMI(eventSearchImpl());
         }
         return eventSearchRMI;
+    }
+
+    public static Verkauf verkaufImpl() {
+        if(verkaufImpl == null) {
+            verkaufImpl = new VerkaufImpl(eventRepository());
+        }
+        return verkaufImpl;
+    }
+
+    public static CustomerSearchTicketsImpl customerSearchTickets() {
+        if(customerSearchTickets == null) {
+            customerSearchTickets = new CustomerSearchTicketsImpl(eventRepository());
+        }
+        return customerSearchTickets;
+    }
+
+    public static CustomerTickets customerTicketsRMI() throws RemoteException {
+        if(customerTicketsRMI == null) {
+            customerTicketsRMI = new CustomerTicketsRMI(customerSearchTickets());
+        }
+        return customerTicketsRMI;
+    }
+
+    public static Verkauf verkaufImplRMI() throws RemoteException {
+        if(verkaufImplRMI == null) {
+            verkaufImplRMI = new VerkaufImplRMI(verkaufImpl());
+        }
+        return verkaufImplRMI;
     }
 
     public static CustomerSearch customerSearchRMI() throws RemoteException {

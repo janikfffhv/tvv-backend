@@ -2,12 +2,18 @@ package at.fhv.tvv.backend.infrastructure;
 
 import at.fhv.tvv.backend.HibernateService;
 import at.fhv.tvv.backend.domain.model.event.Event;
+import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
+import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
+import at.fhv.tvv.shared.dto.CustomerEventDTO;
+import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 public class EventRepositoryImpl implements EventRepository {
 
@@ -41,6 +47,50 @@ public class EventRepositoryImpl implements EventRepository {
                 .createQuery("SELECT e FROM Event e WHERE e.eventId=(?1)", Event.class)
                 .setParameter(1, eventId)
                 .getSingleResult();
+    }
+
+    public Platz searchByPlatzId(int platzId) {
+        return entityManager
+                .createQuery("SELECT p FROM Platz p WHERE p.platzId=(?1)", Platz.class)
+                .setParameter(1, platzId)
+                .getSingleResult();
+    }
+
+    public List<CustomerEventDTO> getCustomerTickets(UUID customerUuid) {
+        List<Verkauf> verkaufListe = entityManager
+                .createQuery("SELECT v from Verkauf v  WHERE v.kundenId=(?1)", Verkauf.class)
+                .setParameter(1, customerUuid)
+                .getResultList();
+        List<CustomerEventDTO> customerListe = new ArrayList<>();
+        for(Verkauf verkauf:verkaufListe) {
+            CustomerEventDTO event = new CustomerEventDTO(verkauf.getVerkaufsId(), verkauf.getVerkaufszeit(), verkauf.getZahlungsmethode().toString(), verkauf.getGesamtpreis());
+            customerListe.add(event);
+        }
+        return customerListe;
+    }
+
+    public void purchase(Verkauf verkauf) {
+        System.out.println("Verkauf gestartet!");
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(verkauf);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<Platz> plaetze = verkauf.getPlaetze();
+        /**for(Platz platz:plaetze) {
+            try {
+
+                entityManager
+                        .createQuery("UPDATE Platz p SET p.verkauf=(?1) WHERE p.platzId=(?2)")
+                        .setParameter(1, verkauf)
+                        .setParameter(2, platz.getPlatzId())
+                        .executeUpdate();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }**/
     }
 
 
