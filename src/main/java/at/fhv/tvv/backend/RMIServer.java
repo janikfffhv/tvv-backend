@@ -1,10 +1,17 @@
 package at.fhv.tvv.backend;
 
+import jakarta.ejb.Singleton;
+import jakarta.ejb.Startup;
+
+import javax.annotation.PostConstruct;
 import java.rmi.Naming;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+@Startup
+@Singleton
 public class RMIServer {
+    @PostConstruct
     public static void main(String[] args) {
         try {
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);

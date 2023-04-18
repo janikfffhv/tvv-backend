@@ -55,6 +55,7 @@ public class HibernateService {
         }
         return eventSearchImpl;
     }
+
     public static EventSearch eventSearchRMI() throws RemoteException {
         if(eventSearchRMI == null) {
             eventSearchRMI = new EventSearchRMI(eventSearchImpl());

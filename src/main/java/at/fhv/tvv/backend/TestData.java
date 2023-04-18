@@ -25,33 +25,39 @@ public class TestData {
     }
 
     public static void generate() {
-        Veranstaltungsort dornbirn = new Veranstaltungsort(685056, "Kulturhaus Dornbirn", "Rathausplatz", "1", 6850, "Dornbirn", "Österreich", "Hauptsaal");
+        Veranstaltungsort dornbirn = new Veranstaltungsort(670011, "Remise Bludenz", "Raiffeisenplatz", "1", 6700, "Bludenz", "Österreich", "Hauptsaal");
         veranstaltungsorte.add(dornbirn);
 
-        Veranstaltungsserie generell = new Veranstaltungsserie("Generelle Serie", "Dies ist eine normale Serie", Kategorie.KONZERT, "TestVeranstalter");
+        Veranstaltungsserie generell = new Veranstaltungsserie("Superstars of the world", "Hier könnte Ihre Werbung stehen!", Kategorie.KONZERT, "FH Vorarlberg GmbH");
         veranstaltungsserien.add(generell);
 
 
 
-        Event event1 = new Event(1001, "Testevent", generell, "Dies ist ein Testevent", 1679443200, dornbirn);
+        Event event1 = new Event(1006, "Bruce Springsteen Konzert", generell, "Hier könnte Ihre Werbung stehen!", 1682002800, dornbirn);
 
-        Verkauf verkauf1 = new Verkauf(UUID.randomUUID(), 10, 0, UUID.randomUUID(), "18:11", Zahlungsmethode.KREDITKARTE, "Tester");
+        Verkauf verkauf1 = new Verkauf(UUID.randomUUID(), 10, 0, UUID.randomUUID(), "18:11", Zahlungsmethode.KREDITKARTE, "Maxine Musterfrau");
 
-        Platz platz1 = new Platz(101, 101, 1, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
-        Platz platz2 = new Platz(102, 102, 2, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
-        Platz platz3 = new Platz(103, 103, 3, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
-        Platz platz4 = new Platz(104, 104, 4, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
-        Platz platz5 = new Platz(105, 105, 5, at.fhv.tvv.backend.domain.model.platz.Kategorie.STEHPLATZ, 120);
+        Platz platz1 = new Platz(401, 401, 1, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
+        Platz platz2 = new Platz(402, 402, 2, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
+        Platz platz3 = new Platz(403, 403, 3, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
+        Platz platz4 = new Platz(404, 404, 4, at.fhv.tvv.backend.domain.model.platz.Kategorie.SITZPLATZ, 120);
+        Platz platz5 = new Platz(405, 405, 5, at.fhv.tvv.backend.domain.model.platz.Kategorie.STEHPLATZ, 120);
+        Platz platz6 = new Platz(406, 406, 7, at.fhv.tvv.backend.domain.model.platz.Kategorie.VIP, 430);
+        Platz platz7 = new Platz(407, 407, 7, at.fhv.tvv.backend.domain.model.platz.Kategorie.VIP, 430);
         event1.addPlatz(platz1);
         event1.addPlatz(platz2);
         event1.addPlatz(platz3);
         event1.addPlatz(platz4);
         event1.addPlatz(platz5);
+        event1.addPlatz(platz6);
+        event1.addPlatz(platz7);
         plaetze.add(platz1);
         plaetze.add(platz2);
         plaetze.add(platz3);
         plaetze.add(platz4);
         plaetze.add(platz5);
+        plaetze.add(platz6);
+        plaetze.add(platz7);
         events.add(event1);
 
         verkauf1.addPlatz(platz1);
