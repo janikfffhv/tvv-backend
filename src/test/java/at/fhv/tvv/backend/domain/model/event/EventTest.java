@@ -44,6 +44,8 @@ class EventTest {
         assertEquals(datum, test.getDatum());
         assertEquals(veranstaltungsort, test.getVeranstaltungsort());
         assertNotNull(test.getPlaetze());
+        assertThrows(IndexOutOfBoundsException.class, () -> test.getPlaetze().get(0));
+        assertNull(test.getEventInternalId()); //Da erst durch DB zugewiesen, was hier ohne DB-Zugriff nicht passiert.
 
     }
 

@@ -44,4 +44,9 @@ public class Veranstaltungsserie {
     public String getVeranstalter() {
         return veranstalter;
     }
+
+    public Long getVeranstaltungsserieInternalId() {
+        return veranstaltungsserieIdInternal;
+    }
+
 }

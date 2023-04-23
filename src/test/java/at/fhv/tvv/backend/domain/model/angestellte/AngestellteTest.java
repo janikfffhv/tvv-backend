@@ -32,6 +32,7 @@ class AngestellteTest {
         assertEquals(vorname, test.getVorname());
         assertEquals(nachname, test.getNachname());
         assertEquals(rolle, test.getRolle());
+        assertNull(test.getAngestellteInternalId()); //Da erst durch DB zugewiesen, was hier ohne DB-Zugriff nicht passiert.
 
     }
 

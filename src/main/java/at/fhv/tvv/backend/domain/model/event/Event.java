@@ -47,6 +47,10 @@ public class Event {
         this.veranstaltungsort = veranstaltungsort;
     }
 
+    public Long getEventInternalId() {
+        return eventIdInternal;
+    }
+
     public int getEventId() {
         return eventId;
     }

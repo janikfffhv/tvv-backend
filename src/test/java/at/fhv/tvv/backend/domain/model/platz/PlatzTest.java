@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlatzTest {
 
     @Test
-    void korrektePlatzErstellung_MitPlatzwahl() {
+    void korrektePlatzErstellung() {
 
         //Testdaten erstellen
         int platzId = 14;
@@ -58,6 +58,7 @@ class PlatzTest {
         assertEquals(dornbirn, test.getEvent().getVeranstaltungsort());
         assertEquals("Bruce Springsteen Konzert", test.getEvent().getName());
         assertEquals(9.99F, test.getVerkauf().getGesamtpreis());
+        assertNull(test.getPlatzInternalId()); //Da erst durch DB zugewiesen, was hier ohne DB-Zugriff nicht passiert.
 
     }
 
