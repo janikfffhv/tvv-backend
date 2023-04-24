@@ -5,9 +5,11 @@ import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
 import at.fhv.tvv.shared.dto.CustomerEventDTO;
 
+import javax.ejb.Local;
 import java.util.List;
 import java.util.UUID;
 
+@Local
 public interface EventRepository {
     List<Event> searchByString (String searchString);
     List<Event> searchByDate (int searchDate1, int SearchDate2);

@@ -1,24 +1,26 @@
 package at.fhv.tvv.backend.application;
 
-import at.fhv.tvv.backend.domain.repository.EventRepository;
+import at.fhv.tvv.backend.interfaces.CustomerTicketsInt;
 import at.fhv.tvv.shared.dto.CustomerEventDTO;
 import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 import at.fhv.tvv.shared.dto.CustomerSearchDTO;
 import at.fhv.tvv.shared.rmi.CustomerSearch;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.UUID;
+@Stateless
+public class CustomerSearchTicketsImpl implements CustomerTicketsInt {
+    @EJB
+    private at.fhv.tvv.backend.domain.repository.EventRepository eventRepository;
 
-public class CustomerSearchTicketsImpl {
-    private final at.fhv.tvv.backend.domain.repository.EventRepository eventRepository;
+    public CustomerSearchTicketsImpl() {
 
-    public CustomerSearchTicketsImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
     }
 
-    public CustomerInfoDTO searchTickets(UUID uuid) {
+    public CustomerInfoDTO searchById(UUID uuid) {
         System.out.println("Ist hier auch!!!");
         try {
             CustomerSearchDTO customer = null;

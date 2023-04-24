@@ -4,21 +4,25 @@ import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
+import at.fhv.tvv.backend.interfaces.EventSearchInt;
 import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
 import at.fhv.tvv.shared.dto.PlatzDTO;
 import at.fhv.tvv.shared.rmi.EventSearch;
 
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.rmi.RemoteException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class EventSearchImpl implements EventSearch {
-    private final at.fhv.tvv.backend.domain.repository.EventRepository eventRepository;
+@Stateless
+public class EventSearchImpl implements EventSearchInt {
+    @EJB
+    private at.fhv.tvv.backend.domain.repository.EventRepository eventRepository;
 
-    public EventSearchImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
+    public EventSearchImpl() {
+            }
 
     public int countVerfuegbar(List<Platz> plaetze) {
         int count = 0;

@@ -9,12 +9,14 @@ import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.dto.CustomerEventDTO;
 import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Stateless
 public class EventRepositoryImpl implements EventRepository {
 
     private final EntityManager entityManager = HibernateService.entityManager();
