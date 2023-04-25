@@ -20,7 +20,7 @@ public class CustomerSearchRMI extends UnicastRemoteObject implements CustomerSe
     public List<CustomerSearchDTO> searchByString(String s) throws RemoteException {
         List<CustomerSearchDTO> customerList = null;
         try {
-            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.167/CustomerSearch");
+            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.166/CustomerSearch");
             customerList = searchStub.searchByString(s);
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,7 +32,7 @@ public class CustomerSearchRMI extends UnicastRemoteObject implements CustomerSe
     public CustomerSearchDTO searchById(UUID uuid) throws RemoteException {
         CustomerSearchDTO customer = null;
         try {
-            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.167/CustomerSearch");
+            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.166/CustomerSearch");
             customer = searchStub.searchById(uuid);
         } catch (Exception e) {
             e.printStackTrace();

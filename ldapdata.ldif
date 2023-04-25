@@ -1,0 +1,89 @@
+version: 1
+
+dn: ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: employees
+
+dn: cn=Janik,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Janik
+sn: Fuchsberger
+userPassword:: SmFuaWs=
+
+dn: cn=Dominic,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Dominic
+sn: Kühne
+userPassword:: RG9taW5pYw==
+
+dn: cn=Nina,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Nina
+sn: Mähr
+userPassword:: TmluYQ==
+
+dn: cn=Matthias,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Matthias
+sn: Stadelmann
+userPassword:: TWF0dGhpYXM=
+
+dn: cn=tf-test,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: tf-test
+sn: Test
+userPassword:: VGVzdC10Zg==
+
+dn: cn=roles-standard,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: roles-standard
+sn: Standard
+userPassword:: cGFzc3dvcmQ=
+
+dn: cn=roles-operator,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: roles-operator
+sn: Operator
+userPassword:: cGFzc3dvcmQ=
+
+dn: cn=roles-standard-and-operator,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: roles-standard-and-operator
+sn: StandardAndOperator
+userPassword:: cGFzc3dvcmQ=
+
+dn: ou=groups,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=Employees,ou=groups,dc=ad,dc=team1,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: Employees
+member: ou=Dominic,dc=team1,dc=com
+member: ou=Janik,dc=team1,dc=com
+member: ou=Matthias,dc=team1,dc=com
+member: ou=Nina,dc=team1,dc=com
+
+dn: ou=customer,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: customer

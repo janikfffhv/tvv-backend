@@ -1,4 +1,4 @@
-package at.fhv.tvv.backend.communication.jms;
+/**package at.fhv.tvv.backend.communication.jms;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.logging.log4j.LogManager;
@@ -65,4 +65,4 @@ public class JMSClientImpl implements JMSClient {
         producer.send(textMessage);
         logger.info("Sent message: {} to topic {}", message, topic);
     }
-}
+}**/

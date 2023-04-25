@@ -1,0 +1,70 @@
+version: 1
+
+dn: ou=employees,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: employees
+
+dn: uid=Dominic,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn:: RG9taW5pYyBLw7xobmU=
+sn: Dominic
+uid: Dominic
+userPassword:: e1NIQTI1Nn0zaGo2T0U3cWFocWtoVS9VMGR0enhZazIwVFNtejFqWUkyOVhYa
+ EMwcmtnPQ==
+
+dn: uid=Nina,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn:: TmluYSBNw6Rocg==
+sn: Nina
+uid: Nina
+userPassword:: e1NIQTI1Nn1aMS9HbklZTkplRlB6eGlKdWZKeWpiakpJVi9QTVdiT3pWRzFUU
+ GRGTTBnPQ==
+
+dn: uid=Janik,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Janik Martin Fuchsberger
+sn: Janik Martin
+uid: Janik
+userPassword:: e1NIQTI1Nn1oZ01rT09tZmlPTGpUS3RQT1RmeXlzZlM3MloyRzRoQlN0NVBtK
+ 29yUEdZPQ==
+
+dn: uid=Matthias,ou=employees,dc=ad,dc=team1,dc=com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Matthias Stadelmann
+sn: Matthias
+uid: Matthias
+userPassword:: e1NIQTI1Nn1MWmM1RU9ObUducW50bVV1bzVtdEFUUzZxL2k0N2VWK2dHSCtYb
+ W1jSVAwPQ==
+
+dn: ou=groups,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: cn=Employees,ou=groups,dc=ad,dc=team1,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: Employees
+member: ou=Dominic,dc=team1,dc=com
+member: ou=Janik,dc=team1,dc=com
+member: ou=Matthias,dc=team1,dc=com
+member: ou=Nina,dc=team1,dc=com
+
+dn: ou=customer,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: customer
+

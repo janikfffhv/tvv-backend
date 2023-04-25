@@ -23,7 +23,7 @@ public class CustomerSearchTicketsImpl {
         try {
             CustomerSearchDTO customer = null;
             try {
-                CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.167/CustomerSearch");
+                CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.166/CustomerSearch");
                 customer = searchStub.searchById(uuid);
             } catch (Exception e) {
                 e.printStackTrace();
