@@ -35,6 +35,10 @@ public class HibernateService {
 
     private static MessageConsumer messageConsumerImpl;
     private static MessageConsumer messageConsumerRMI;
+
+    private static MessageProducer messageProducerImpl;
+    private static MessageProducer messageProducerRMI;
+
     public static EntityManager entityManager() {
         if (entityManager == null) {
             entityManager = Persistence.createEntityManagerFactory("Factory").createEntityManager();
@@ -134,5 +138,22 @@ public class HibernateService {
         }
         return messageConsumerRMI;
     }
+
+    public static MessageProducer messageProducerImpl() {
+        if(messageProducerImpl == null) {
+            messageProducerImpl = new MessageProducerImpl();
+        }
+        return messageProducerImpl;
+    }
+
+    public static MessageProducer messageProducerRMI() throws RemoteException {
+        if(messageProducerRMI == null) {
+            messageProducerRMI = new MessageProducerRMI(messageProducerImpl());
+        }
+        return messageProducerRMI;
+    }
+
+
+
 
 }

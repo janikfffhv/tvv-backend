@@ -62,7 +62,7 @@
     <dependency>
         <groupId>com.github.janikfffhv</groupId>
         <artifactId>tvv-shared</artifactId>
-        <version>master-SNAPSHOT</version>
+        <version>c40a68335a</version>
     </dependency>
     <dependency>
         <groupId>org.apache.activemq</groupId>

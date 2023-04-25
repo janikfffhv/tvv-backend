@@ -14,6 +14,8 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     private UUID kundenUUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
     private String zahlungsmethode = "";
 
+    private String benutzerName = "";
+
     @Override
     public List<WarenkorbZeileDTO> getWarenkorb() {
         return warenkorb;
@@ -27,6 +29,11 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     @Override
     public String getZahlungsMethode() throws RemoteException {
         return zahlungsmethode;
+    }
+
+    @Override
+    public String getBenutzerName() throws RemoteException {
+        return benutzerName;
     }
 
     @Override
@@ -47,6 +54,11 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     @Override
     public void hinzufuegenKunde(UUID uuid) throws RemoteException {
         this.kundenUUID = uuid;
+    }
+
+    @Override
+    public void setBenutzerName(String name) throws RemoteException {
+        this.benutzerName = name;
     }
 
     @Override

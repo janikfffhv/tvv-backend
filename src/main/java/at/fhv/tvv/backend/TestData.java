@@ -1,5 +1,6 @@
 package at.fhv.tvv.backend;
 
+import at.fhv.tvv.backend.application.MessageProducerImpl;
 import at.fhv.tvv.backend.domain.model.angestellte.Angestellte;
 import at.fhv.tvv.backend.domain.model.angestellte.Rolle;
 import at.fhv.tvv.backend.domain.model.event.Event;
@@ -12,6 +13,7 @@ import at.fhv.tvv.backend.domain.model.verkauf.Zahlungsmethode;
 import at.fhv.tvv.backend.infrastructure.JMSDurableSubscribers;
 
 import javax.persistence.*;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -23,13 +25,15 @@ public class TestData {
     private static final List<Event> events = new ArrayList<>();
 
     private static final JMSDurableSubscribers jmsDurableSubscribers = new JMSDurableSubscribers();
+    private static final MessageProducerImpl messageProducerImpl = new MessageProducerImpl();
+
     private static final List<Platz> plaetze = new ArrayList<>();
     private static final List<Angestellte> angestellte = new ArrayList<>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
         generate();
     }
 
-    public static void generate() {
+    public static void generate() throws RemoteException {
         Veranstaltungsort dornbirn = new Veranstaltungsort(670011, "Remise Bludenz", "Raiffeisenplatz", "1", 6700, "Bludenz", "Österreich", "Hauptsaal");
         veranstaltungsorte.add(dornbirn);
 
@@ -107,5 +111,8 @@ public class TestData {
 
         manager.getTransaction().commit();
         jmsDurableSubscribers.createDurableSubscribers(angestellte);
+
+        messageProducerImpl.produce("KONZERT", "Test-Konzert1", "Eine Testnachricht über ein Konzert!");
+
     }
 }

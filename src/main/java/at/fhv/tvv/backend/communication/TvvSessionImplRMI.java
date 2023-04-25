@@ -27,6 +27,11 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     }
 
     @Override
+    public String getBenutzerName() throws RemoteException {
+        return tvvSession.getBenutzerName();
+    }
+
+    @Override
     public String getZahlungsMethode() throws RemoteException {
         return tvvSession.getZahlungsMethode();
     }
@@ -49,6 +54,11 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     @Override
     public void hinzufuegenKunde(UUID uuid) throws RemoteException {
         tvvSession.hinzufuegenKunde(uuid);
+    }
+
+    @Override
+    public void setBenutzerName(String name) throws RemoteException {
+        tvvSession.setBenutzerName(name);
     }
 
     @Override

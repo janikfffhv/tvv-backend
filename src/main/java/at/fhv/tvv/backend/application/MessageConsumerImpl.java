@@ -41,6 +41,7 @@ public class MessageConsumerImpl implements MessageConsumer {
             if(angestellter.isEmpty()) {
                 throw new IllegalArgumentException("Angestellter konnte nicht gefunden werden!");
             }
+            System.out.println("LÄUFT!!!" + s);
             for(Kategorie kat : angestellter.get().getTopics()) {
                 Topic topic = session.createTopic(kat.getName());
                 TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
