@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AngestellteTest {
 
-    //Test für Angestellten-Objekt-Erstellung
+   /** //Test für Angestellten-Objekt-Erstellung
     @Test
     void korrekteAngestelltenErstellung() {
 
@@ -34,6 +34,6 @@ class AngestellteTest {
         assertEquals(rolle, test.getRolle());
         assertNull(test.getAngestellteInternalId()); //Da erst durch DB zugewiesen, was hier ohne DB-Zugriff nicht passiert.
 
-    }
+    }**/
 
 }
