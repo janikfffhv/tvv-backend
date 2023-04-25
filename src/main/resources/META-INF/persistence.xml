@@ -11,6 +11,7 @@
         <class>at.fhv.tvv.backend.domain.model.event.Event</class>
         <class>at.fhv.tvv.backend.domain.model.platz.Platz</class>
         <class>at.fhv.tvv.backend.domain.model.verkauf.Verkauf</class>
+        <class>at.fhv.tvv.backend.domain.model.angestellte.Angestellte</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>

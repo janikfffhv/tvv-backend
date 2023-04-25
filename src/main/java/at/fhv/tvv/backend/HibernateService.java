@@ -1,12 +1,10 @@
 package at.fhv.tvv.backend;
-import at.fhv.tvv.backend.application.CustomerSearchTicketsImpl;
-import at.fhv.tvv.backend.application.EventSearchImpl;
-import at.fhv.tvv.backend.application.TvvSessionFactoryImpl;
-import at.fhv.tvv.backend.application.VerkaufImpl;
+import at.fhv.tvv.backend.application.*;
 import at.fhv.tvv.backend.communication.*;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.shared.rmi.*;
+import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -33,6 +31,10 @@ public class HibernateService {
 
     private static CustomerSearchTicketsImpl customerSearchTickets;
 
+    private static ActiveMQConnectionFactory activeMQConnectionFactory;
+
+    private static MessageConsumer messageConsumerImpl;
+    private static MessageConsumer messageConsumerRMI;
     public static EntityManager entityManager() {
         if (entityManager == null) {
             entityManager = Persistence.createEntityManagerFactory("Factory").createEntityManager();
@@ -111,4 +113,26 @@ public class HibernateService {
         }
         return tvvSessionFactoryRMI;
     }
+
+    public static ActiveMQConnectionFactory activeMQConnectionFactory() {
+        if(activeMQConnectionFactory == null) {
+            activeMQConnectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616?jms.prefetchPolicy.all=0");
+        }
+        return activeMQConnectionFactory;
+    }
+
+    public static MessageConsumer messageConsumerImpl() {
+        if(messageConsumerImpl == null) {
+            messageConsumerImpl = new MessageConsumerImpl(eventRepository());
+        }
+        return messageConsumerImpl;
+    }
+
+    public static MessageConsumer messageConsumerRMI() throws RemoteException {
+        if(messageConsumerRMI == null) {
+            messageConsumerRMI = new MessageConsumerRMI(messageConsumerImpl());
+        }
+        return messageConsumerRMI;
+    }
+
 }

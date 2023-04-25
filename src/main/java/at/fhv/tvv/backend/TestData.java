@@ -1,5 +1,7 @@
 package at.fhv.tvv.backend;
 
+import at.fhv.tvv.backend.domain.model.angestellte.Angestellte;
+import at.fhv.tvv.backend.domain.model.angestellte.Rolle;
 import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.model.veranstaltungsort.Veranstaltungsort;
@@ -7,6 +9,7 @@ import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie;
 import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
 import at.fhv.tvv.backend.domain.model.verkauf.Zahlungsmethode;
+import at.fhv.tvv.backend.infrastructure.JMSDurableSubscribers;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,7 +22,9 @@ public class TestData {
     private static final List<Veranstaltungsserie> veranstaltungsserien = new ArrayList<>();
     private static final List<Event> events = new ArrayList<>();
 
+    private static final JMSDurableSubscribers jmsDurableSubscribers = new JMSDurableSubscribers();
     private static final List<Platz> plaetze = new ArrayList<>();
+    private static final List<Angestellte> angestellte = new ArrayList<>();
     public static void main(String[] args) {
         generate();
     }
@@ -62,6 +67,32 @@ public class TestData {
 
         verkauf1.addPlatz(platz1);
 
+        List<Rolle> rollen = new ArrayList<>();
+        rollen.add(Rolle.MITARBEITER);
+        rollen.add(Rolle.OPERATOR);
+        List<Kategorie> topics = new ArrayList<>();
+        topics.add(Kategorie.KINO);
+        topics.add(Kategorie.KONZERT);
+        topics.add(Kategorie.THEATER);
+
+        Angestellte janik = new Angestellte("Janik", rollen, topics);
+        Angestellte dominic = new Angestellte("Dominic", rollen, topics);
+        Angestellte nina = new Angestellte("Nina", rollen, topics);
+        Angestellte matthias = new Angestellte("Matthias", rollen, topics);
+        Angestellte tftest = new Angestellte("tf-test", rollen, topics);
+        Angestellte standard = new Angestellte("roles-standard", List.of(Rolle.MITARBEITER), topics);
+        Angestellte operator = new Angestellte("roles-operator", List.of(Rolle.OPERATOR), topics);
+        Angestellte stundop = new Angestellte("roles-standard-and-operator", rollen, topics);
+        angestellte.add(janik);
+        angestellte.add(dominic);
+        angestellte.add(nina);
+        angestellte.add(matthias);
+        angestellte.add(tftest);
+        angestellte.add(standard);
+        angestellte.add(operator);
+        angestellte.add(stundop);
+
+
 
 
         EntityManager manager = HibernateService.entityManager();
@@ -71,8 +102,10 @@ public class TestData {
         veranstaltungsserien.forEach(manager::persist);
         events.forEach(manager::persist);
         plaetze.forEach(manager::persist);
+        angestellte.forEach(manager::persist);
         manager.persist(verkauf1);
 
         manager.getTransaction().commit();
+        jmsDurableSubscribers.createDurableSubscribers(angestellte);
     }
 }

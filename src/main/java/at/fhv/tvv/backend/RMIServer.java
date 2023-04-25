@@ -21,6 +21,7 @@ public class RMIServer {
             Naming.rebind("rmi://localhost/sessionFactory", HibernateService.tvvSessionFactoryRMI());
             Naming.rebind("rmi://localhost/verkauf", HibernateService.verkaufImplRMI());
             Naming.rebind("rmi://localhost/customerTickets", HibernateService.customerTicketsRMI());
+            Naming.rebind("rmi://localhost/messageConsumer", HibernateService.messageConsumerRMI());
 
         } catch (Exception e) {
             e.printStackTrace();

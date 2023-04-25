@@ -1,6 +1,7 @@
 package at.fhv.tvv.backend.infrastructure;
 
 import at.fhv.tvv.backend.HibernateService;
+import at.fhv.tvv.backend.domain.model.angestellte.Angestellte;
 import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
@@ -10,10 +11,7 @@ import at.fhv.tvv.shared.dto.CustomerEventDTO;
 import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 
 import javax.persistence.EntityManager;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class EventRepositoryImpl implements EventRepository {
 
@@ -67,6 +65,15 @@ public class EventRepositoryImpl implements EventRepository {
             customerListe.add(event);
         }
         return customerListe;
+    }
+
+    public Optional<Angestellte> getAngestellerById(String userid) {
+        return entityManager
+                .createQuery("Select a FROM Angestellte a WHERE a.benutzername = :userId", Angestellte.class)
+                .setParameter("userId", userid)
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 
     public void purchase(Verkauf verkauf) {
