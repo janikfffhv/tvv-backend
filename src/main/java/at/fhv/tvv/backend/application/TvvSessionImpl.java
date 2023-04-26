@@ -16,6 +16,10 @@ public class TvvSessionImpl implements TvvSession, Serializable {
 
     private String benutzerName = "";
 
+    private List<String> rollen = new ArrayList<>();
+
+    private List<String> topics = new ArrayList <>();
+
     @Override
     public List<WarenkorbZeileDTO> getWarenkorb() {
         return warenkorb;
@@ -52,6 +56,16 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     }
 
     @Override
+    public List<String> getRollen() throws RemoteException {
+        return rollen;
+    }
+
+    @Override
+    public List<String> getTopics() throws RemoteException {
+        return topics;
+    }
+
+    @Override
     public void hinzufuegenKunde(UUID uuid) throws RemoteException {
         this.kundenUUID = uuid;
     }
@@ -65,6 +79,16 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     public void hinzufuegenZahlungsMethode(String s) throws RemoteException {
         this.zahlungsmethode = s;
 
+    }
+
+    @Override
+    public void setRollen(List<String> list) throws RemoteException {
+        this.rollen = list;
+    }
+
+    @Override
+    public void setTopics(List<String> list) throws RemoteException {
+        this.topics = list;
     }
 
 
