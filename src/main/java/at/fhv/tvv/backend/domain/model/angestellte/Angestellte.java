@@ -44,4 +44,8 @@ public class Angestellte {
     public List<Kategorie> getTopics() {
         return topics;
     }
+
+    public void setTopics(List<Kategorie> topics) {
+        this.topics = topics;
+    }
 }

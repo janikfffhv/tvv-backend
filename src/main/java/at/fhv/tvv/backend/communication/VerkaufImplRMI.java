@@ -16,7 +16,7 @@ public class VerkaufImplRMI extends UnicastRemoteObject implements Verkauf {
     }
 
     @Override
-    public void kaufe(VerkaufDTO verkaufDTO) throws RemoteException {
-        verkauf.kaufe(verkaufDTO);
+    public boolean kaufe(VerkaufDTO verkaufDTO) throws RemoteException {
+        return verkauf.kaufe(verkaufDTO);
     }
 }

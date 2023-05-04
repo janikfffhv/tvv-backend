@@ -39,6 +39,9 @@ public class HibernateService {
     private static MessageProducer messageProducerImpl;
     private static MessageProducer messageProducerRMI;
 
+    private static RolesTopics rolesTopicsImpl;
+    private static RolesTopics rolesTopicsRMI;
+
     public static EntityManager entityManager() {
         if (entityManager == null) {
             entityManager = Persistence.createEntityManagerFactory("Factory").createEntityManager();
@@ -151,6 +154,20 @@ public class HibernateService {
             messageProducerRMI = new MessageProducerRMI(messageProducerImpl());
         }
         return messageProducerRMI;
+    }
+
+    public static RolesTopics rolesTopicsImpl() {
+        if(rolesTopicsImpl == null) {
+            rolesTopicsImpl = new RolesTopicsImpl(eventRepository());
+        }
+        return rolesTopicsImpl;
+    }
+
+    public static RolesTopics rolesTopicsRMI() throws RemoteException {
+        if(rolesTopicsRMI == null) {
+            rolesTopicsRMI = new RolesTopicsRMI(rolesTopicsImpl());
+        }
+        return rolesTopicsRMI;
     }
 
 

@@ -1,13 +1,15 @@
 package at.fhv.tvv.backend.application;
 
+import at.fhv.tvv.backend.domain.model.angestellte.Angestellte;
+import at.fhv.tvv.backend.domain.model.angestellte.Rolle;
+import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
+import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
 import at.fhv.tvv.shared.rmi.TvvSession;
 
 import java.io.Serializable;
 import java.rmi.RemoteException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class TvvSessionImpl implements TvvSession, Serializable {
     private List<WarenkorbZeileDTO> warenkorb = new ArrayList<>();
@@ -19,6 +21,9 @@ public class TvvSessionImpl implements TvvSession, Serializable {
     private List<String> rollen = new ArrayList<>();
 
     private List<String> topics = new ArrayList <>();
+
+    public TvvSessionImpl() {
+    }
 
     @Override
     public List<WarenkorbZeileDTO> getWarenkorb() {

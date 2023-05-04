@@ -7,12 +7,15 @@ import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.dto.*;
 import at.fhv.tvv.shared.rmi.EventSearch;
 import at.fhv.tvv.shared.rmi.Verkauf;
+import com.sun.istack.Nullable;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 public class VerkaufImpl implements Verkauf {
     private final EventRepository eventRepository;
@@ -23,7 +26,7 @@ public class VerkaufImpl implements Verkauf {
 
 
     @Override
-    public void kaufe(VerkaufDTO verkaufDTO) throws RemoteException {
+    public boolean kaufe(VerkaufDTO verkaufDTO) throws RemoteException {
         Zahlungsmethode methode = Zahlungsmethode.valueOf(verkaufDTO.getZahlungsmethode());
         at.fhv.tvv.backend.domain.model.verkauf.Verkauf verkauf = new at.fhv.tvv.backend.domain.model.verkauf.Verkauf(
                 UUID.randomUUID(),
@@ -36,9 +39,15 @@ public class VerkaufImpl implements Verkauf {
                 );
         for(WarenkorbZeileDTO platz:verkaufDTO.getPlaetze()) {
             Platz platz1 = eventRepository.searchByPlatzId(platz.getPlatzId());
-            verkauf.addPlatz(platz1);
+            try{
+            if(platz1.getVerkauf().getVerkaufsId() != null) {
+                return false;
+            }} catch (Exception e) {
+                verkauf.addPlatz(platz1);
+                e.printStackTrace();
+            }
         }
         eventRepository.purchase(verkauf);
-
+        return true;
     }
 }

@@ -76,6 +76,16 @@ public class EventRepositoryImpl implements EventRepository {
                 .findFirst();
     }
 
+    public void updateAngestellter(Angestellte angestellter) {
+        try {
+            entityManager.getTransaction().begin();
+            entityManager.persist(angestellter);
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void purchase(Verkauf verkauf) {
         System.out.println("Verkauf gestartet!");
         try {

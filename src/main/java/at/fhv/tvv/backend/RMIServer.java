@@ -14,6 +14,7 @@ public class RMIServer {
     @PostConstruct
     public static void main(String[] args) {
         try {
+            TestData.generate();
             LocateRegistry.createRegistry(Registry.REGISTRY_PORT);
 
             Naming.rebind("rmi://localhost/eventSearch", HibernateService.eventSearchRMI());
@@ -23,6 +24,7 @@ public class RMIServer {
             Naming.rebind("rmi://localhost/customerTickets", HibernateService.customerTicketsRMI());
             Naming.rebind("rmi://localhost/messageConsumer", HibernateService.messageConsumerRMI());
             Naming.rebind("rmi://localhost/messageProducer", HibernateService.messageProducerRMI());
+            Naming.rebind("rmi://localhost/rolesTopics", HibernateService.rolesTopicsRMI());
 
         } catch (Exception e) {
             e.printStackTrace();

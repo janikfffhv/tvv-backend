@@ -24,4 +24,6 @@ public interface EventRepository {
     Optional<Angestellte> getAngestellerById(String userid);
 
     void purchase (Verkauf verkauf);
+
+    void updateAngestellter(Angestellte angestellter);
 }

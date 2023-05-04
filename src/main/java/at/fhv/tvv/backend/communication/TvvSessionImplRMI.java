@@ -1,6 +1,7 @@
 package at.fhv.tvv.backend.communication;
 
 import at.fhv.tvv.backend.application.TvvSessionImpl;
+import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
 import at.fhv.tvv.shared.rmi.TvvSession;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession {
+
     private final TvvSessionImpl tvvSession = new TvvSessionImpl();
 
     public TvvSessionImplRMI() throws RemoteException {
@@ -52,6 +54,16 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     }
 
     @Override
+    public List<String> getRollen() throws RemoteException {
+        return tvvSession.getRollen();
+    }
+
+    @Override
+    public List<String> getTopics() throws RemoteException {
+        return tvvSession.getTopics();
+    }
+
+    @Override
     public void hinzufuegenKunde(UUID uuid) throws RemoteException {
         tvvSession.hinzufuegenKunde(uuid);
     }
@@ -65,5 +77,15 @@ public class TvvSessionImplRMI extends UnicastRemoteObject implements TvvSession
     public void hinzufuegenZahlungsMethode(String s) throws RemoteException {
         tvvSession.hinzufuegenZahlungsMethode(s);
 
+    }
+
+    @Override
+    public void setRollen(List<String> list) throws RemoteException {
+        tvvSession.setRollen(list);
+    }
+
+    @Override
+    public void setTopics(List<String> list) throws RemoteException {
+        tvvSession.setTopics(list);
     }
 }
