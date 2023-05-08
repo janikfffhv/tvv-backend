@@ -15,7 +15,13 @@ import java.util.*;
 
 public class EventRepositoryImpl implements EventRepository {
 
-    private final EntityManager entityManager = HibernateService.entityManager();
+    private final EntityManager entityManager;
+
+    public EventRepositoryImpl(EntityManager entityManager) {
+
+        this.entityManager = entityManager;
+
+    }
 
     public List<Event> searchByString(String searchString) {
         return entityManager

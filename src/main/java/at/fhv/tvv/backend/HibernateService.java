@@ -52,7 +52,7 @@ public class HibernateService {
 
     public static EventRepository eventRepository() {
         if(eventRepository == null) {
-            eventRepository = new EventRepositoryImpl();
+            eventRepository = new EventRepositoryImpl(entityManager());
         }
         return eventRepository;
     }
