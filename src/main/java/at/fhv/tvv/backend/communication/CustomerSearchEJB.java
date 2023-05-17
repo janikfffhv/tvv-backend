@@ -17,7 +17,7 @@ public class CustomerSearchEJB implements at.fhv.tvv.shared.ejb.CustomerSearch {
     public List<CustomerSearchDTO> searchByString(String s) {
         List<CustomerSearchDTO> customerList = null;
         try {
-            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.167/CustomerSearch");
+            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.166/CustomerSearch");
             customerList = searchStub.searchByString(s);
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +29,7 @@ public class CustomerSearchEJB implements at.fhv.tvv.shared.ejb.CustomerSearch {
     public CustomerSearchDTO searchById(UUID uuid) {
         CustomerSearchDTO customer = null;
         try {
-            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.167/CustomerSearch");
+            CustomerSearch searchStub = (CustomerSearch) Naming.lookup("rmi://10.0.40.166/CustomerSearch");
             customer = searchStub.searchById(uuid);
         } catch (Exception e) {
             e.printStackTrace();

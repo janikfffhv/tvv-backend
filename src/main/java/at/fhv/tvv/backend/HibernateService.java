@@ -3,6 +3,7 @@ import at.fhv.tvv.backend.application.CustomerSearchTicketsImpl;
 import at.fhv.tvv.backend.communication.*;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.rmi.*;
+import org.apache.activemq.ActiveMQConnectionFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -13,7 +14,7 @@ public class HibernateService {
     private static EntityManager entityManager;
 
     private static CustomerSearch customerSearchRMI;
-
+    private static ActiveMQConnectionFactory activeMQConnectionFactory;
 
     public static EntityManager entityManager() {
         if (entityManager == null) {
@@ -22,6 +23,14 @@ public class HibernateService {
         }
         return entityManager;
     }
+
+    public static ActiveMQConnectionFactory activeMQConnectionFactory() {
+        if(activeMQConnectionFactory == null) {
+            activeMQConnectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616?jms.prefetchPolicy.all=0");
+        }
+        return activeMQConnectionFactory;
+    }
+
 
 
 

@@ -1,25 +1,28 @@
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
-  http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
-             version="2.1">
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+  http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
     <persistence-unit name="Factory">
         <description>Hibernate EntityManager</description>
-
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie</class>
         <class>at.fhv.tvv.backend.domain.model.veranstaltungsort.Veranstaltungsort</class>
         <class>at.fhv.tvv.backend.domain.model.event.Event</class>
         <class>at.fhv.tvv.backend.domain.model.platz.Platz</class>
         <class>at.fhv.tvv.backend.domain.model.verkauf.Verkauf</class>
+        <class>at.fhv.tvv.backend.domain.model.angestellte.Angestellte</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect" />
             <!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="show_sql" value="true"/>
 
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.0.40.167:5432/teamd_production"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5434/teamd_production"/>
             <property name="javax.persistence.jdbc.user" value="teamd"/>
             <property name="javax.persistence.jdbc.password" value="TeamSpirit23!"/>
         </properties>
