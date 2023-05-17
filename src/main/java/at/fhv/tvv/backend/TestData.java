@@ -12,6 +12,7 @@ import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
 import at.fhv.tvv.backend.domain.model.verkauf.Zahlungsmethode;
 import at.fhv.tvv.backend.infrastructure.JMSDurableSubscribers;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.jms.JMSException;
@@ -20,7 +21,6 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 
 @Startup
 @Singleton
@@ -39,6 +39,7 @@ public class TestData {
         generate();
     }
 
+    @PostConstruct
     public static void generate() throws RemoteException, JMSException {
         Veranstaltungsort dornbirn = new Veranstaltungsort(670011, "Remise Bludenz", "Raiffeisenplatz", "1", 6700, "Bludenz", "Österreich", "Hauptsaal");
         veranstaltungsorte.add(dornbirn);

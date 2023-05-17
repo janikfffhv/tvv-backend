@@ -6,5 +6,5 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 @Local
 public interface VerkaufInt {
-    void kaufe(VerkaufDTO verkauf);
+    boolean kaufe(VerkaufDTO verkauf);
 }

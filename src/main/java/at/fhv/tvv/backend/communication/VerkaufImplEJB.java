@@ -19,7 +19,7 @@ public class VerkaufImplEJB implements at.fhv.tvv.shared.ejb.Verkauf {
     }
 
     @Override
-    public void kaufe(VerkaufDTO verkaufDTO) {
-            verkauf.kaufe(verkaufDTO);
+    public boolean kaufe(VerkaufDTO verkaufDTO) {
+            return verkauf.kaufe(verkaufDTO);
     }
 }

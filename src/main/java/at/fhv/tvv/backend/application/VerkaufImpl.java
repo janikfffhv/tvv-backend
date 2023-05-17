@@ -28,7 +28,7 @@ public class VerkaufImpl implements VerkaufInt {
 
 
     @Override
-    public void kaufe(VerkaufDTO verkaufDTO) {
+    public boolean kaufe(VerkaufDTO verkaufDTO) {
         Zahlungsmethode methode = Zahlungsmethode.valueOf(verkaufDTO.getZahlungsmethode());
         at.fhv.tvv.backend.domain.model.verkauf.Verkauf verkauf = new at.fhv.tvv.backend.domain.model.verkauf.Verkauf(
                 UUID.randomUUID(),
@@ -38,12 +38,18 @@ public class VerkaufImpl implements VerkaufInt {
                 verkaufDTO.getVerkaufszeit(),
                 methode,
                 "Max Mustermann"
-                );
+        );
         for(WarenkorbZeileDTO platz:verkaufDTO.getPlaetze()) {
             Platz platz1 = eventRepository.searchByPlatzId(platz.getPlatzId());
-            verkauf.addPlatz(platz1);
+            try{
+                if(platz1.getVerkauf().getVerkaufsId() != null) {
+                    return false;
+                }} catch (Exception e) {
+                verkauf.addPlatz(platz1);
+                e.printStackTrace();
+            }
         }
         eventRepository.purchase(verkauf);
-
+        return true;
     }
 }
