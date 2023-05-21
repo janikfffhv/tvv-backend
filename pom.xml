@@ -24,7 +24,7 @@
     <dependency>
         <groupId>com.github.janikfffhv</groupId>
         <artifactId>tvv-shared</artifactId>
-        <version>e2e8a2069a</version>
+        <version>3ea30cc2b1</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
     <dependency>

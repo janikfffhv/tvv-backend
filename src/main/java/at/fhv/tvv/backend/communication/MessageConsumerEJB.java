@@ -21,4 +21,13 @@ public class MessageConsumerEJB implements MessageConsumer {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public boolean acknowledgeMessage(String userName, String id) {
+        try {
+            return messageConsumer.acknowledgeMessage(userName, id);
+        } catch (JMSException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

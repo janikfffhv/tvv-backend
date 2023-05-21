@@ -11,4 +11,5 @@ import java.util.List;
 @Local
 public interface MessageConsumerInt {
     List<MessageDTO> getMessages(String userName) throws JMSException;
+    boolean acknowledgeMessage(String userName, String id) throws JMSException;
 }
