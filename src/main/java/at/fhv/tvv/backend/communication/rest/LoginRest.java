@@ -41,7 +41,7 @@ public class LoginRest {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } else {
             CustomerInfoDTO cinfo = customerSearch.searchById(UUID.fromString(loginLdap));
-            return Response.status(Response.Status.OK).entity(cinfo).build();
+            return Response.status(Response.Status.OK).entity(cinfo).entity(loginLdap).build();
         }
 
     }

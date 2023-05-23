@@ -48,7 +48,6 @@ public class EventSearch {
     public Response searchById(@QueryParam("id") @DefaultValue("0") int id) {
                 EventDescriptionDTO eventDesc = event.searchById(id);
                 return Response.status(Response.Status.OK).entity(eventDesc).build();
-
         }
 
 }
