@@ -21,11 +21,12 @@ public class EventSearch {
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName, @QueryParam("kategorie") @DefaultValue("") String kategorie, @QueryParam("startDate") @DefaultValue("") String startDate, @QueryParam("endDate") @DefaultValue("") String endDate, @QueryParam("id") @DefaultValue("0") int id) {
+    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName, @QueryParam("kategorie") @DefaultValue("") String kategorie, @QueryParam("startDate") @DefaultValue("") String startDate, @QueryParam("endDate") @DefaultValue("") String endDate) {
         if (eventName != null || kategorie != null || startDate != null || endDate != null) {
             List<EventSearchDTO> eventList;
             if (eventName != "") {
                 eventList = event.searchByString(eventName);
+                System.out.println(eventList);
                 return Response.status(Response.Status.OK).entity(eventList).build();
             }
             if (kategorie != "") {
@@ -36,13 +37,18 @@ public class EventSearch {
                 eventList = event.searchByDate(Integer.parseInt(startDate), Integer.parseInt(endDate));
                 return Response.status(Response.Status.OK).entity(eventList).build();
             }
-            if (id != 0) {
-                EventDescriptionDTO eventDesc = event.searchById(id);
-                return Response.status(Response.Status.OK).entity(eventDesc).build();
-            }
         }
 
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    @GET
+    @Path("/searchById")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchById(@QueryParam("id") @DefaultValue("0") int id) {
+                EventDescriptionDTO eventDesc = event.searchById(id);
+                return Response.status(Response.Status.OK).entity(eventDesc).build();
+
+        }
 
 }
