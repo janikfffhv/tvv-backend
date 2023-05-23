@@ -69,6 +69,56 @@ cn: roles-standard-and-operator
 sn: StandardAndOperator
 userPassword:: cGFzc3dvcmQ=
 
+dn: ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: customers
+
+dn: cn=Josie,ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Josie
+sn: Stöber
+description: de5cc747-d471-44a1-9b37-784c81e704e5
+userPassword:: Sm9zaWU=
+
+dn: cn=Aiden,ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Aiden
+sn: Sorg
+description: af3ce120-2059-4533-95d6-883f1567d376
+userPassword:: QWlkZW4=
+
+dn: cn=Isa,ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Isa
+sn: Friese
+description: 130dc8e2-d3ce-401f-bb00-70c600219f45
+userPassword:: SXNh
+
+dn: cn=Adelina,ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Adelina
+sn: Landmann
+description: 6622b362-b1f4-4efc-8801-699880a6e8db
+userPassword:: QWRlbGluYQ==
+
+dn: cn=Erva,ou=customers,dc=ad,dc=team1,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: Erva
+sn: Grewe
+description: 0c28d094-4c31-4f05-ad74-2d97af7aaf04
+userPassword:: RXJ2YQ==
+
 dn: ou=groups,dc=ad,dc=team1,dc=com
 objectClass: organizationalUnit
 objectClass: top
@@ -83,7 +133,4 @@ member: ou=Janik,dc=team1,dc=com
 member: ou=Matthias,dc=team1,dc=com
 member: ou=Nina,dc=team1,dc=com
 
-dn: ou=customer,dc=ad,dc=team1,dc=com
-objectClass: organizationalUnit
-objectClass: top
-ou: customer
+

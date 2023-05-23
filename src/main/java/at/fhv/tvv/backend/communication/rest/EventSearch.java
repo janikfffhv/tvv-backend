@@ -3,6 +3,8 @@ package at.fhv.tvv.backend.communication.rest;
 import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.EventSearchInt;
+import at.fhv.tvv.shared.dto.EventDescriptionDTO;
+import at.fhv.tvv.shared.dto.EventSearchDTO;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -16,31 +18,31 @@ public class EventSearch {
     @EJB
     private EventSearchInt event;
 
-    @EJB
-    private EventRepository eventRepository;
-
-    private List<Event> eventList;
-
     @GET
     @Path("/search")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName, @QueryParam("kategorie") @DefaultValue("") String kategorie, @QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
+    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName, @QueryParam("kategorie") @DefaultValue("") String kategorie, @QueryParam("startDate") @DefaultValue("") String startDate, @QueryParam("endDate") @DefaultValue("") String endDate, @QueryParam("id") @DefaultValue("0") int id) {
         if (eventName != null || kategorie != null || startDate != null || endDate != null) {
-            if (eventName != null) {
-                eventList = eventRepository.searchByString(eventName);
-                return Response.status(Response.Status.OK).build();
+            List<EventSearchDTO> eventList;
+            if (eventName != "") {
+                eventList = event.searchByString(eventName);
+                return Response.status(Response.Status.OK).entity(eventList).build();
             }
-            if (kategorie != null) {
-                eventList = eventRepository.searchByCategory(kategorie);
-                return Response.ok().build();
+            if (kategorie != "") {
+                eventList = event.searchByCategory(kategorie);
+                return Response.status(Response.Status.OK).entity(eventList).build();
             }
-            if (startDate != null && endDate != null) {
-                eventList = eventRepository.searchByDate(Integer.parseInt(startDate), Integer.parseInt(endDate));
-                return Response.ok().build();
+            if (startDate != "" && endDate != "") {
+                eventList = event.searchByDate(Integer.parseInt(startDate), Integer.parseInt(endDate));
+                return Response.status(Response.Status.OK).entity(eventList).build();
+            }
+            if (id != 0) {
+                EventDescriptionDTO eventDesc = event.searchById(id);
+                return Response.status(Response.Status.OK).entity(eventDesc).build();
             }
         }
 
-        return Response.ok().build();
+        return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
 }

@@ -7,6 +7,7 @@ import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.MessageConsumerInt;
 import at.fhv.tvv.shared.dto.MessageDTO;
 import at.fhv.tvv.shared.rmi.MessageConsumer;
+import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQSession;
 
 import javax.ejb.EJB;
@@ -21,8 +22,8 @@ import java.util.Optional;
 @Stateless
 public class MessageConsumerImpl implements MessageConsumerInt {
 
-    private Connection connection;
-    private Session session;
+    private ActiveMQConnection connection;
+    private ActiveMQSession session;
 
     @EJB
     private EventRepository eventRepository;
@@ -35,10 +36,10 @@ public class MessageConsumerImpl implements MessageConsumerInt {
     public List<MessageDTO> getMessages(String s) throws JMSException {
        List<MessageDTO> messages = new ArrayList<>();
         try {
-            connection = HibernateService.activeMQConnectionFactory().createConnection();
+            connection = (ActiveMQConnection) HibernateService.activeMQConnectionFactory().createConnection();
             connection.setClientID("client");
             connection.start();
-            session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
+            session = (ActiveMQSession) connection.createSession(false, ActiveMQSession.CLIENT_ACKNOWLEDGE);
             List<TextMessage> textMessageList = new ArrayList<>();
             System.out.println(s);
             Optional<Angestellte> angestellter = eventRepository.getAngestellerById(s);
@@ -72,25 +73,28 @@ public class MessageConsumerImpl implements MessageConsumerInt {
     @Override
     public boolean acknowledgeMessage(String userName, String id) throws JMSException {
         try {
-            connection = HibernateService.activeMQConnectionFactory().createConnection();
+            connection = (ActiveMQConnection) HibernateService.activeMQConnectionFactory().createConnection();
             connection.setClientID("client");
             connection.start();
-            session = connection.createSession(false, ActiveMQSession.INDIVIDUAL_ACKNOWLEDGE);
+            session = (ActiveMQSession) connection.createSession(false, ActiveMQSession.INDIVIDUAL_ACKNOWLEDGE);
             Optional<Angestellte> angestellter = eventRepository.getAngestellerById(userName);
             if(angestellter.isEmpty()) {
                 connection.close();
                 throw new IllegalArgumentException("Angestellter konnte nicht gefunden werden!");
             }
-            System.out.println("LÄUFT!!!" + userName);
+            System.out.println("ACKNOWLEDGEMENT" + userName + ", ID: " + id);
             for(Kategorie kat : angestellter.get().getTopics()) {
                 Topic topic = session.createTopic(kat.getName());
-                String messageSelector = "JMSMessageID = '" + id + "'";
-                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName(), messageSelector, false);
                 Message message;
+                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
                 while((message = topicSubscriber.receiveNoWait()) != null) {
                     TextMessage message1 = (TextMessage) message;
-                    System.out.println(message1.getText());
-                    message.acknowledge();
+                    System.out.println(message1.getJMSMessageID());
+                    if(message1.getJMSMessageID().equals(id)) {
+                        System.out.println("ACKNOWLEDGMENT MESSAGE: " + message1.getText());
+                        message1.acknowledge();
+                    }
+
                 }
                 topicSubscriber.close();
             }
