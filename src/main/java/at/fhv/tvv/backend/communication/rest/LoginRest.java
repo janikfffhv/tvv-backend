@@ -1,18 +1,14 @@
 package at.fhv.tvv.backend.communication.rest;
 
-import at.fhv.tvv.backend.domain.repository.EventRepository;
-import at.fhv.tvv.backend.infrastructure.LdapService;
 import at.fhv.tvv.backend.interfaces.CustomerTicketsInt;
 import at.fhv.tvv.backend.interfaces.LdapServiceInt;
 import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 
 import javax.ejb.EJB;
-import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Path("/login")
 public class LoginRest {
@@ -41,7 +37,11 @@ public class LoginRest {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } else {
             CustomerInfoDTO cinfo = customerSearch.searchById(UUID.fromString(loginLdap));
-            return Response.status(Response.Status.OK).entity(cinfo).entity(loginLdap).build();
+            Map<String, java.io.Serializable> result = new HashMap<>();
+            result.put("cinfo", cinfo);
+            result.put("cid", loginLdap);
+
+            return Response.status(Response.Status.OK).entity(result).build();
         }
 
     }
