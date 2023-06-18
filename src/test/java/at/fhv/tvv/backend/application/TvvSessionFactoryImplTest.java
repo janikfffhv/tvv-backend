@@ -1,6 +1,7 @@
 package at.fhv.tvv.backend.application;
 
 import at.fhv.tvv.backend.HibernateService;
+import at.fhv.tvv.backend.communication.TvvSessionImplRMI;
 import at.fhv.tvv.shared.rmi.TvvSession;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +18,9 @@ class TvvSessionFactoryImplTest {
 
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl tst = tvvSessionFactory.createSession();
+        TvvSession tst = tvvSessionFactory.createSession();
 
-        assertEquals(TvvSessionImpl.class, tst.getClass());
+        assertEquals(TvvSessionImplRMI.class, tst.getClass());
     }
 
 

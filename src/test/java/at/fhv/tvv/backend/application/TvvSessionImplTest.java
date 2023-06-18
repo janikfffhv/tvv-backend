@@ -1,10 +1,12 @@
 package at.fhv.tvv.backend.application;
 
 import at.fhv.tvv.backend.HibernateService;
+import at.fhv.tvv.backend.communication.TvvSessionImplRMI;
 import at.fhv.tvv.backend.domain.model.angestellte.Rolle;
 import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.model.verkauf.Zahlungsmethode;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
+import at.fhv.tvv.shared.rmi.TvvSession;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.RemoteException;
@@ -17,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class TvvSessionImplTest {
 
     @Test
-    void TvvSessionImplKorrektInitilisieren() throws RemoteException {
+    void TvvSessionImplKorrektInitialisieren() throws RemoteException {
         System.out.println("-------------------------------------Test 1 TvvSessionImplKorrektInitilisieren-------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
-        assertEquals(TvvSessionImpl.class, test.getClass());
+        assertEquals(TvvSessionImplRMI.class, test.getClass());
     }
 
     @Test
@@ -31,11 +33,11 @@ class TvvSessionImplTest {
         System.out.println("-------------------------------------Test 2 getWarenkorbVonBestehenderSession-------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
         List<WarenkorbZeileDTO> actualWarenkorb = test.getWarenkorb();
 
-        assertEquals(TvvSessionImpl.class, test.getClass());
+        assertEquals(TvvSessionImplRMI.class, test.getClass());
         assertEquals(0, actualWarenkorb.size());
     }
 
@@ -44,13 +46,13 @@ class TvvSessionImplTest {
         System.out.println("-------------------------------------Test 3 EinenArtikelInWarenkorbHinzufügen-------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
         List<WarenkorbZeileDTO> actualWarenkorb = test.getWarenkorb();
         WarenkorbZeileDTO testT1 = new WarenkorbZeileDTO(2,"sitzplatz", 10, "Bruce", (float) 10.51, "12052023" );
 
         test.hinzufuegen(testT1);
-        assertEquals(TvvSessionImpl.class, test.getClass());
+        assertEquals(TvvSessionImplRMI.class, test.getClass());
         assertEquals(1, actualWarenkorb.size());
     }
 
@@ -59,7 +61,7 @@ class TvvSessionImplTest {
         System.out.println("-------------------------------------Test 4 EinenArtikelAusWarenkorbEntfernen-------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
         List<WarenkorbZeileDTO> actualWarenkorb = test.getWarenkorb();
         WarenkorbZeileDTO testT1 = new WarenkorbZeileDTO(2,"sitzplatz", 10, "Bruce", (float) 10.51, "12052023" );
@@ -69,7 +71,7 @@ class TvvSessionImplTest {
         assertEquals(1, actualWarenkorb.size());
 
         test.loeschen(testT1);
-        assertEquals(TvvSessionImpl.class, test.getClass());
+        assertEquals(TvvSessionImplRMI.class, test.getClass());
         assertEquals(0, actualWarenkorb.size());
 
 
@@ -80,7 +82,7 @@ class TvvSessionImplTest {
         System.out.println("-------------------------------------Test 5 WarenkorbDerSessionLeerenSodassKeineTicketsMehrDrinnenSind-------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
         List<WarenkorbZeileDTO> actualWarenkorb = test.getWarenkorb();
         WarenkorbZeileDTO testT1 = new WarenkorbZeileDTO(2,"sitzplatz", 10, "Bruce", (float) 10.51, "12052023" );
@@ -94,7 +96,7 @@ class TvvSessionImplTest {
         assertEquals(3, actualWarenkorb.size());
 
         test.loeschen(testT1);
-        assertEquals(TvvSessionImpl.class, test.getClass());
+        assertEquals(TvvSessionImplRMI.class, test.getClass());
         assertEquals(2, actualWarenkorb.size());
 
         test.leeren();
@@ -107,7 +109,7 @@ class TvvSessionImplTest {
         System.out.println("-------------------------------------Test 6 ErstellteSessionMitInformationenBefuellen -------------------------");
         TvvSessionFactoryImpl tvvSessionFactory = (TvvSessionFactoryImpl) HibernateService.tvvSessionFactoryImpl();
 
-        TvvSessionImpl test = tvvSessionFactory.createSession();
+        TvvSession test = tvvSessionFactory.createSession();
 
         //Benutzername angeben
         String benutzername = "Testuser";
