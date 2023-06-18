@@ -33,16 +33,12 @@ class VerkaufImplEJBTest {
         testTickets.add(testTicket2);
 
         VerkaufImplEJB verkaufImplEJB = new VerkaufImplEJB();
-        VerkaufImplEJB verkauf = Mockito.mock(VerkaufImplEJB.class);
 
         VerkaufDTO verkaufDTO = new VerkaufDTO(100.50F, kunde, Zahlungsmethode.RECHNUNG.getName(), testTickets, "19:08");
 
-        when(verkauf.kaufe(verkaufDTO)).thenReturn(new VerkaufImpl().kaufe(verkaufDTO));
-
-        boolean kaufe = verkauf.kaufe(verkaufDTO);
 
         //Kaufprozess ausführen
-        verkaufImplEJB.kaufe(verkaufDTO);
+        boolean kaufe = verkaufImplEJB.kaufe(verkaufDTO);
 
         assertTrue(kaufe);
 
