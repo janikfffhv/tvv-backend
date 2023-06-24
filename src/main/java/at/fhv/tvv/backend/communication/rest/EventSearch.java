@@ -19,28 +19,37 @@ public class EventSearch {
     private EventSearchInt event;
 
     @GET
-    @Path("/search")
+    @Path("/searchByString")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName, @QueryParam("kategorie") @DefaultValue("") String kategorie, @QueryParam("startDate") @DefaultValue("") String startDate, @QueryParam("endDate") @DefaultValue("") String endDate) {
-        if (eventName != null || kategorie != null || startDate != null || endDate != null) {
+    public Response search(@QueryParam("eventname") @DefaultValue("") String eventName) {
+        if(eventName != null) {
             List<EventSearchDTO> eventList;
-            if (eventName != "") {
-                eventList = event.searchByString(eventName);
-                System.out.println(eventList);
-                return Response.status(Response.Status.OK).entity(eventList).build();
-            }
-            if (kategorie != "") {
-                eventList = event.searchByCategory(kategorie);
-                return Response.status(Response.Status.OK).entity(eventList).build();
-            }
-            if (startDate != "" && endDate != "") {
-                eventList = event.searchByDate(Integer.parseInt(startDate), Integer.parseInt(endDate));
-                return Response.status(Response.Status.OK).entity(eventList).build();
-            }
+            eventList = event.searchByString(eventName);
+            System.out.println(eventList);
+            return Response.status(Response.Status.OK).entity(eventList).build();
         }
-
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
+
+    @GET
+    @Path("/searchByCategory")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByCategory(@QueryParam("kategorie") String kategorie) {
+        List<EventSearchDTO> eventList;
+        eventList = event.searchByCategory(kategorie);
+        return Response.status(Response.Status.OK).entity(eventList).build();
+    }
+
+    @GET
+    @Path("/searchByDate")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchByDate(@QueryParam("startDate") String startDate, @QueryParam("endDate") String endDate) {
+        List<EventSearchDTO> eventList;
+        eventList = event.searchByDate(Integer.parseInt(startDate), Integer.parseInt(endDate));
+        return Response.status(Response.Status.OK).entity(eventList).build();
+    }
+
+
 
     @GET
     @Path("/searchById")
