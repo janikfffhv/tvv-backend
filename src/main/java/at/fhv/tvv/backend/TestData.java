@@ -531,8 +531,6 @@ public class TestData {
         angestellte.add(operator);
         angestellte.add(stundop);
 
-
-
         EntityManager manager = HibernateService.entityManager();
         manager.getTransaction().begin();
 

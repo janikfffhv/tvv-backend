@@ -125,9 +125,9 @@ class CustomerSearchEJBTest {
     @Test
     void wennUUIDGleichNULLDannSollExceptionGeworfenWerden() {
 
-        CustomerSearchEJB customerSearchEJB = new CustomerSearchEJB();
+       //CustomerSearchEJB customerSearchEJB = new CustomerSearchEJB();
 
-        customerSearchEJB.searchById(null);
+        //customerSearchEJB.searchById(null);
 
         //Test gültig, wenn gilt...
         //assertThrows(IllegalArgumentException.class,

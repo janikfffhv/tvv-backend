@@ -57,6 +57,7 @@ public class EventRepositoryImpl implements EventRepository {
     }
 
     public List<CustomerEventDTO> getCustomerTickets(UUID customerUuid) {
+        System.out.println("GET CUSTOMER TICKETS!!!");
         List<Verkauf> verkaufListe = entityManager
                 .createQuery("SELECT v from Verkauf v  WHERE v.kundenId=(?1)", Verkauf.class)
                 .setParameter(1, customerUuid)

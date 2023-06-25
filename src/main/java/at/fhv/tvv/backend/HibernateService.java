@@ -1,7 +1,4 @@
 package at.fhv.tvv.backend;
-import at.fhv.tvv.backend.application.CustomerSearchTicketsImpl;
-import at.fhv.tvv.backend.communication.*;
-import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.rmi.*;
 import org.apache.activemq.ActiveMQConnectionFactory;
 

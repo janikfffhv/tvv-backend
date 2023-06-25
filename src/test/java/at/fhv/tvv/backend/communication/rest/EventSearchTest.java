@@ -30,7 +30,7 @@ class EventSearchTest {
 
         expectedEvents.add(event1);
 
-        Response eventSearchResponse = eventSearch.search(sucheBegriff, "", "", "");
+        Response eventSearchResponse = eventSearch.search(sucheBegriff);
         List<EventSearchDTO> actualEvents = eventSearchResponse.readEntity(List.class);
 
         //Test gültig, wenn gilt...
@@ -52,7 +52,7 @@ class EventSearchTest {
         expectedEvents.add(event1);
         expectedEvents.add(event2);
 
-        Response eventSearchResponse = eventSearch.search("", sucheKategorie, "", "");
+        Response eventSearchResponse = eventSearch.searchByCategory(sucheKategorie);
         List<EventSearchDTO> actualEvents = eventSearchResponse.readEntity(List.class);
 
         //Test gültig, wenn gilt...
@@ -74,7 +74,7 @@ class EventSearchTest {
 
         expectedEvents.add(event1);
 
-        Response eventSearchResponse = eventSearch.search("", "", startDatum, endDatum);
+        Response eventSearchResponse = eventSearch.searchByDate(startDatum, endDatum);
         List<EventSearchDTO> actualEvents = eventSearchResponse.readEntity(List.class);
 
         //Test gültig, wenn gilt...

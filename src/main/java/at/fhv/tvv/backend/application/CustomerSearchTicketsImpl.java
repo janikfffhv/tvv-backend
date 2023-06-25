@@ -33,6 +33,7 @@ public class CustomerSearchTicketsImpl implements CustomerTicketsInt {
             String customerName = customer.getVorname() + " " + customer.getNachname();
             String adresse = customer.getHausnummer() + " " + customer.getStrasse();
             String ort = customer.getPlz() + " " + customer.getOrt();
+            System.out.println(uuid);
             List<CustomerEventDTO> events = eventRepository.getCustomerTickets(uuid);
             return new CustomerInfoDTO(customerName, customer.getGeburtsdatum(), adresse, ort, events);
         } catch (Exception e) {
