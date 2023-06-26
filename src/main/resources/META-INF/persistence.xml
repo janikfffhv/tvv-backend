@@ -22,7 +22,7 @@
             <property name="show_sql" value="true"/>
 
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://tvv-postgres:5434/teamd_production"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.0.40.167:5432/teamd_production"/>
             <property name="javax.persistence.jdbc.user" value="teamd"/>
             <property name="javax.persistence.jdbc.password" value="TeamSpirit23!"/>
         </properties>

@@ -23,7 +23,7 @@ public class HibernateService {
 
     public static ActiveMQConnectionFactory activeMQConnectionFactory() {
         if(activeMQConnectionFactory == null) {
-            activeMQConnectionFactory = new ActiveMQConnectionFactory("tcp://tvv-activemq:61616?jms.prefetchPolicy.all=0");
+            activeMQConnectionFactory = new ActiveMQConnectionFactory("tcp://10.0.40.167:61616?jms.prefetchPolicy.all=0");
         }
         return activeMQConnectionFactory;
     }

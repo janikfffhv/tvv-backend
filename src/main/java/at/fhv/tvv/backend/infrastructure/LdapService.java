@@ -16,7 +16,7 @@ public class LdapService implements LdapServiceInt {
 
         Hashtable<String, String> env = new Hashtable<>();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-        env.put(Context.PROVIDER_URL, "ldap://tvv-ldap:10389");
+        env.put(Context.PROVIDER_URL, "ldap://10.0.40.167:389");
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
         env.put(Context.SECURITY_PRINCIPAL, "cn=" + username + ",ou=customers,dc=ad,dc=team1, dc=com");
         env.put(Context.SECURITY_CREDENTIALS, password);
