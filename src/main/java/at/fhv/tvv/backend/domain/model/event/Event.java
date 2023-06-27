@@ -34,7 +34,7 @@ public class Event {
     private List<Platz> plaetze = new ArrayList<>();
 
 
-    protected Event() {
+    public Event() {
 
     }
 
