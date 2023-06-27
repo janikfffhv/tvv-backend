@@ -32,6 +32,10 @@ public class MessageConsumerImpl implements MessageConsumerInt {
 
     }
 
+    public MessageConsumerImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
     @Override
     public List<MessageDTO> getMessages(String s) throws JMSException {
        List<MessageDTO> messages = new ArrayList<>();
