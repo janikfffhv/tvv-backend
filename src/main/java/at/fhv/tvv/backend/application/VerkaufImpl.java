@@ -26,6 +26,10 @@ public class VerkaufImpl implements VerkaufInt {
     public VerkaufImpl() {
     }
 
+    public VerkaufImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
 
     @Override
     public boolean kaufe(VerkaufDTO verkaufDTO) {

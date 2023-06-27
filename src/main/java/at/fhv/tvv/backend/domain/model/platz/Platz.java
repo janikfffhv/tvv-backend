@@ -32,7 +32,7 @@ public class Platz {
     @NotFound(action=NotFoundAction.IGNORE)
     private Verkauf verkauf;
 
-    protected Platz() {
+    public Platz() {
 
     }
 
