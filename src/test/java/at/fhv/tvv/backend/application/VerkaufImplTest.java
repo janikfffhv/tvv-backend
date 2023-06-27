@@ -8,10 +8,7 @@ import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.shared.dto.VerkaufDTO;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,7 +40,7 @@ class VerkaufImplTest {
         int datum = (int) (new Date("21/10/2023").getTime()/1000);
 
         List<WarenkorbZeileDTO> warenkorb = new ArrayList<>();
-        WarenkorbZeileDTO platz = new WarenkorbZeileDTO(807, "VIP", 1013, "Theater Patati-Patata präsentiert: Alex und die gelbe Maus", 11.99F, Integer.toString(datum));
+        WarenkorbZeileDTO platz = new WarenkorbZeileDTO(807, "STEHPLATZ", 1013, "Theater Patati-Patata präsentiert: Alex und die gelbe Maus", 11.99F, Integer.toString(datum));
         warenkorb.add(platz);
 
         VerkaufDTO verkaufDTO = new VerkaufDTO(200, UUID.fromString("de5cc747-d471-44a1-9b37-784c81e704e5"), "RECHNUNG", warenkorb, "11:14");

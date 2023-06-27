@@ -1,6 +1,5 @@
 package at.fhv.tvv.backend.application;
 
-import at.fhv.tvv.backend.HibernateService;
 import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.model.platz.Kategorie;
 import at.fhv.tvv.backend.domain.model.platz.Platz;
@@ -12,7 +11,6 @@ import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
 import at.fhv.tvv.shared.dto.PlatzDTO;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;

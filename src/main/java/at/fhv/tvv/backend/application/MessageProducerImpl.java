@@ -5,7 +5,6 @@ import at.fhv.tvv.backend.interfaces.MessageProducerInt;
 
 import javax.ejb.Stateless;
 import javax.jms.*;
-import java.rmi.RemoteException;
 
 @Stateless
 public class MessageProducerImpl implements MessageProducerInt {

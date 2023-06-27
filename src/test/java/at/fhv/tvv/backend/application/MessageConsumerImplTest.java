@@ -7,7 +7,6 @@ import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.shared.dto.MessageDTO;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import javax.jms.JMSException;
@@ -111,9 +110,60 @@ class MessageConsumerImplTest {
     }
 
     @Test
-    void nachrichtAcknowledgenVonTfTest() {
+    void nachrichtAcknowledgenVonTfTest() throws JMSException {
 
-        //TODO
+        String username = "tf-test";
+        String messageId = "teamdp-34287-1684328668038-1:25:1:1:1";
+
+        //MOCKING
+        EventRepository eventRepositoryMock = Mockito.mock(EventRepositoryImpl.class);
+        MessageConsumerImpl messageConsumerImpl = new MessageConsumerImpl(eventRepositoryMock);
+
+        List<Rolle> rollen = new ArrayList<>();
+        rollen.add(Rolle.MITARBEITER);
+        rollen.add(Rolle.OPERATOR);
+        List<Kategorie> topics = new ArrayList<>();
+        topics.add(Kategorie.KINO);
+        topics.add(Kategorie.KONZERT);
+        topics.add(Kategorie.THEATER);
+        Optional<Angestellte> expectedAngestellter = Optional.of(new Angestellte(username, rollen, topics));
+
+        Mockito.when(eventRepositoryMock.getAngestellerById(username)).thenReturn(expectedAngestellter);
+
+        //MESSAGE SUCHEN
+        boolean messageAckn = messageConsumerImpl.acknowledgeMessage(username, messageId);
+
+        //Test gültig wenn...
+        assertTrue(messageAckn);
+
+    }
+
+    @Test
+    void nachrichtAcknowledgeMitUngueltigemUserSollFehlschlagen() throws JMSException {
+
+        String username = "GibtsNicht";
+        String messageId = "teamdp-34287-1684328668038-1:25:1:1:1";
+
+        //MOCKING
+        EventRepository eventRepositoryMock = Mockito.mock(EventRepositoryImpl.class);
+        MessageConsumerImpl messageConsumerImpl = new MessageConsumerImpl(eventRepositoryMock);
+
+        List<Rolle> rollen = new ArrayList<>();
+        rollen.add(Rolle.MITARBEITER);
+        rollen.add(Rolle.OPERATOR);
+        List<Kategorie> topics = new ArrayList<>();
+        topics.add(Kategorie.KINO);
+        topics.add(Kategorie.KONZERT);
+        topics.add(Kategorie.THEATER);
+        Optional<Angestellte> expectedAngestellter = Optional.empty(); //KEIN USER GEFUNDEN ZU DIESEM NAMEN
+
+        Mockito.when(eventRepositoryMock.getAngestellerById(username)).thenReturn(expectedAngestellter);
+
+        //MESSAGE SUCHEN
+        boolean messageAckn = messageConsumerImpl.acknowledgeMessage(username, messageId);
+
+        //Test gültig wenn...
+        assertFalse(messageAckn);
 
     }
 
