@@ -1,5 +1,6 @@
 package at.fhv.tvv.backend.application;
 
+import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.CustomerTicketsInt;
 import at.fhv.tvv.shared.dto.CustomerEventDTO;
 import at.fhv.tvv.shared.dto.CustomerInfoDTO;
@@ -18,6 +19,10 @@ public class CustomerSearchTicketsImpl implements CustomerTicketsInt {
 
     public CustomerSearchTicketsImpl() {
 
+    }
+
+    public CustomerSearchTicketsImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
     public CustomerInfoDTO searchById(UUID uuid) {

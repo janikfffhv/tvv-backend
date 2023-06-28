@@ -6,14 +6,12 @@ import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.MessageConsumerInt;
 import at.fhv.tvv.shared.dto.MessageDTO;
-import at.fhv.tvv.shared.rmi.MessageConsumer;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQSession;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.jms.*;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +28,10 @@ public class MessageConsumerImpl implements MessageConsumerInt {
 
     public MessageConsumerImpl() {
 
+    }
+
+    public MessageConsumerImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
     }
 
     @Override

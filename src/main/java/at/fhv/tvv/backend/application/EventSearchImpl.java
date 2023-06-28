@@ -22,7 +22,11 @@ public class EventSearchImpl implements EventSearchInt {
     private at.fhv.tvv.backend.domain.repository.EventRepository eventRepository;
 
     public EventSearchImpl() {
-            }
+    }
+
+    public EventSearchImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
 
     public int countVerfuegbar(List<Platz> plaetze) {
         int count = 0;

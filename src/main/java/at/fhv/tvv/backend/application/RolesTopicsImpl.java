@@ -5,11 +5,9 @@ import at.fhv.tvv.backend.domain.model.angestellte.Rolle;
 import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.RolesTopicsInt;
-import at.fhv.tvv.shared.rmi.RolesTopics;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +21,11 @@ public class RolesTopicsImpl implements RolesTopicsInt {
     public RolesTopicsImpl() {
 
     }
+
+    public RolesTopicsImpl(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
     @Override
     public List<String> getRoles(String s) {
         List<String> roles = new ArrayList<>();
