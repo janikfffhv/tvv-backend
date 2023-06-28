@@ -29,7 +29,7 @@ public class Platz {
     private Event event;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @NotFound(action=NotFoundAction.IGNORE)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Verkauf verkauf;
 
     public Platz() {
@@ -68,16 +68,20 @@ public class Platz {
         return preis;
     }
 
-    public Event getEvent() { return event; }
-
-    public Verkauf getVerkauf() { return verkauf; }
-
-    public void setVerkauf(Verkauf verkauf) {
-        this.verkauf = verkauf;
+    public Event getEvent() {
+        return event;
     }
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public Verkauf getVerkauf() {
+        return verkauf;
+    }
+
+    public void setVerkauf(Verkauf verkauf) {
+        this.verkauf = verkauf;
     }
 
 

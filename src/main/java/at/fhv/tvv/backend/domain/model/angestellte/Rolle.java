@@ -6,8 +6,12 @@ public enum Rolle {
 
     private final String name;
 
-    Rolle(String name) {this.name = name;}
+    Rolle(String name) {
+        this.name = name;
+    }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
 }

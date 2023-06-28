@@ -32,7 +32,7 @@ public class LoginRest {
             return Response.status(Response.Status.NOT_ACCEPTABLE).build();
         }
         String loginLdap = login.customerInLdap(userName, password);
-        if(Objects.equals(loginLdap, "FALSE")) {
+        if (Objects.equals(loginLdap, "FALSE")) {
             System.out.println("Unauthorized!");
             return Response.status(Response.Status.UNAUTHORIZED).build();
         } else {

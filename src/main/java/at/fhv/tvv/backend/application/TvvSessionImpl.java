@@ -2,11 +2,9 @@ package at.fhv.tvv.backend.application;
 
 import at.fhv.tvv.backend.interfaces.TvvSessionInt;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
-import at.fhv.tvv.shared.ejb.TvvSession;
 
 import javax.ejb.Stateful;
 import java.io.Serializable;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -21,7 +19,7 @@ public class TvvSessionImpl implements TvvSessionInt, Serializable {
 
     private List<String> rollen = new ArrayList<>();
 
-    private List<String> topics = new ArrayList <>();
+    private List<String> topics = new ArrayList<>();
 
     public TvvSessionImpl() {
     }
@@ -47,6 +45,11 @@ public class TvvSessionImpl implements TvvSessionInt, Serializable {
     }
 
     @Override
+    public void setBenutzerName(String name) {
+        this.benutzerName = name;
+    }
+
+    @Override
     public void hinzufuegen(WarenkorbZeileDTO warenkorbZeileDTO) {
         warenkorb.add(warenkorbZeileDTO);
     }
@@ -67,8 +70,18 @@ public class TvvSessionImpl implements TvvSessionInt, Serializable {
     }
 
     @Override
+    public void setRollen(List<String> list) {
+        this.rollen = list;
+    }
+
+    @Override
     public List<String> getTopics() {
         return topics;
+    }
+
+    @Override
+    public void setTopics(List<String> list) {
+        this.topics = list;
     }
 
     @Override
@@ -77,24 +90,9 @@ public class TvvSessionImpl implements TvvSessionInt, Serializable {
     }
 
     @Override
-    public void setBenutzerName(String name) {
-        this.benutzerName = name;
-    }
-
-    @Override
     public void hinzufuegenZahlungsMethode(String s) {
         this.zahlungsmethode = s;
 
-    }
-
-    @Override
-    public void setRollen(List<String> list) {
-        this.rollen = list;
-    }
-
-    @Override
-    public void setTopics(List<String> list) {
-        this.topics = list;
     }
 
 

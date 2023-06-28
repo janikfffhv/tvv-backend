@@ -35,6 +35,7 @@ public class TestData {
 
     private static final List<Platz> plaetze = new ArrayList<>();
     private static final List<Angestellte> angestellte = new ArrayList<>();
+
     public static void main(String[] args) throws RemoteException, JMSException {
         generate();
     }
@@ -93,19 +94,19 @@ public class TestData {
 
 
         //Events
-        int datum1 = (int) (new Date("01/08/2023").getTime()/1000);
-        int datum2 = (int) (new Date("31/12/2023").getTime()/1000);
-        int datum3 = (int) (new Date("21/08/2023").getTime()/1000);
-        int datum4 = (int) (new Date("24/09/2023").getTime()/1000);
-        int datum5 = (int) (new Date("17/12/2023").getTime()/1000);
-        int datum6 = (int) (new Date("21/10/2023").getTime()/1000);
-        int datum7 = (int) (new Date("20/10/2023").getTime()/1000);
-        int datum8 = (int) (new Date("17/09/2023").getTime()/1000);
-        int datum9 = (int) (new Date("27/10/2023").getTime()/1000);
-        int datum10 = (int) (new Date("30/11/2023").getTime()/1000);
-        int datum11 = (int) (new Date("12/10/2023").getTime()/1000);
-        int datum12 = (int) (new Date("16/11/2023").getTime()/1000);
-        int datum13 = (int) (new Date("13/12/2023").getTime()/1000);
+        int datum1 = (int) (new Date("01/08/2023").getTime() / 1000);
+        int datum2 = (int) (new Date("31/12/2023").getTime() / 1000);
+        int datum3 = (int) (new Date("21/08/2023").getTime() / 1000);
+        int datum4 = (int) (new Date("24/09/2023").getTime() / 1000);
+        int datum5 = (int) (new Date("17/12/2023").getTime() / 1000);
+        int datum6 = (int) (new Date("21/10/2023").getTime() / 1000);
+        int datum7 = (int) (new Date("20/10/2023").getTime() / 1000);
+        int datum8 = (int) (new Date("17/09/2023").getTime() / 1000);
+        int datum9 = (int) (new Date("27/10/2023").getTime() / 1000);
+        int datum10 = (int) (new Date("30/11/2023").getTime() / 1000);
+        int datum11 = (int) (new Date("12/10/2023").getTime() / 1000);
+        int datum12 = (int) (new Date("16/11/2023").getTime() / 1000);
+        int datum13 = (int) (new Date("13/12/2023").getTime() / 1000);
 
         Event event1 = new Event(1006, "Bruce Springsteen Konzert", sotw, "Hier k&oumlnnte Ihre Werbung stehen!", 1682002800, bludenz1);
         Event event2 = new Event(1007, "Requiem", mc, "Requiem - Das klassische Stueck aufgefuehrt in Feldkirch!", datum1, feldkirch1);

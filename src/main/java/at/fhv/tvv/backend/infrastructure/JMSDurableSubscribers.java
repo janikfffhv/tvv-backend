@@ -27,10 +27,10 @@ public class JMSDurableSubscribers {
             connection.start();
             session = connection.createSession(false, Session.CLIENT_ACKNOWLEDGE);
             for (Angestellte angesteller : angestellte) {
-                for(Kategorie kategorie : angesteller.getTopics()) {
-                Topic topic = session.createTopic(kategorie.getName());
-                TopicSubscriber subscriber = session.createDurableSubscriber(topic, angesteller.getBenutzername()+topic.getTopicName());
-                subscriber.close();
+                for (Kategorie kategorie : angesteller.getTopics()) {
+                    Topic topic = session.createTopic(kategorie.getName());
+                    TopicSubscriber subscriber = session.createDurableSubscriber(topic, angesteller.getBenutzername() + topic.getTopicName());
+                    subscriber.close();
                 }
             }
             session.close();

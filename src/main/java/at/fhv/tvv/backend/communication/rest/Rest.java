@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
         title = "TVV OpenAPI",
         version = "1.0.0"),
         servers = {
-                @Server(url = "/backend-1.0-SNAPSHOT",description = "localhost")
+                @Server(url = "/backend-1.0-SNAPSHOT", description = "localhost")
         }
 )
 public class Rest extends Application {

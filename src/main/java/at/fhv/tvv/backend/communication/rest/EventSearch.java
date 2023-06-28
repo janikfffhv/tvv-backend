@@ -1,7 +1,5 @@
 package at.fhv.tvv.backend.communication.rest;
 
-import at.fhv.tvv.backend.domain.model.event.Event;
-import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.backend.interfaces.EventSearchInt;
 import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
@@ -22,7 +20,7 @@ public class EventSearch {
     @Path("/searchByString")
     @Produces(MediaType.APPLICATION_JSON)
     public Response search(@QueryParam("eventname") @DefaultValue("") String eventName) {
-        if(eventName != null) {
+        if (eventName != null) {
             List<EventSearchDTO> eventList;
             eventList = event.searchByString(eventName);
             System.out.println(eventList);
@@ -50,13 +48,12 @@ public class EventSearch {
     }
 
 
-
     @GET
     @Path("/searchById")
     @Produces(MediaType.APPLICATION_JSON)
     public Response searchById(@QueryParam("id") @DefaultValue("0") int id) {
-                EventDescriptionDTO eventDesc = event.searchById(id);
-                return Response.status(Response.Status.OK).entity(eventDesc).build();
-        }
+        EventDescriptionDTO eventDesc = event.searchById(id);
+        return Response.status(Response.Status.OK).entity(eventDesc).build();
+    }
 
 }

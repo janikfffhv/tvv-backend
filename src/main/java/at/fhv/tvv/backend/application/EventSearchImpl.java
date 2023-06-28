@@ -3,16 +3,13 @@ package at.fhv.tvv.backend.application;
 import at.fhv.tvv.backend.domain.model.event.Event;
 import at.fhv.tvv.backend.domain.model.platz.Platz;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
-import at.fhv.tvv.backend.infrastructure.EventRepositoryImpl;
 import at.fhv.tvv.backend.interfaces.EventSearchInt;
 import at.fhv.tvv.shared.dto.EventDescriptionDTO;
 import at.fhv.tvv.shared.dto.EventSearchDTO;
 import at.fhv.tvv.shared.dto.PlatzDTO;
-import at.fhv.tvv.shared.rmi.EventSearch;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.rmi.RemoteException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -30,8 +27,8 @@ public class EventSearchImpl implements EventSearchInt {
 
     public int countVerfuegbar(List<Platz> plaetze) {
         int count = 0;
-        for(Platz platz:plaetze) {
-            if(platz.getVerkauf()==null) {
+        for (Platz platz : plaetze) {
+            if (platz.getVerkauf() == null) {
                 count++;
             }
         }
@@ -40,9 +37,9 @@ public class EventSearchImpl implements EventSearchInt {
 
     public List<PlatzDTO> getPlaetze(List<Platz> plaetze) {
         List<PlatzDTO> plaetzeReturn = new ArrayList<>();
-        for(Platz platz:plaetze) {
+        for (Platz platz : plaetze) {
             String verkaufsUUID = "";
-            if(platz.getVerkauf()!=null) {
+            if (platz.getVerkauf() != null) {
                 verkaufsUUID = platz.getVerkauf().getVerkaufsId().toString();
             }
             PlatzDTO platzDTO = new PlatzDTO(platz.getPlatzId(), platz.getNummer(), platz.getKategorie().toString(), platz.getReihe(), verkaufsUUID, platz.getPreis());
@@ -73,14 +70,14 @@ public class EventSearchImpl implements EventSearchInt {
                 .searchByDate(searchDate1, searchDate2)
                 .stream()
                 .map(event ->
-                    new EventSearchDTO(
-                            event.getEventId(),
-                            event.getName(),
-                            event.getVeranstaltungsserie().getName(),
-                            event.getDatum(),
-                            event.getVeranstaltungsort().getOrt(),
-                            event.getPlaetze().size(),
-                            countVerfuegbar(event.getPlaetze()))
+                        new EventSearchDTO(
+                                event.getEventId(),
+                                event.getName(),
+                                event.getVeranstaltungsserie().getName(),
+                                event.getDatum(),
+                                event.getVeranstaltungsort().getOrt(),
+                                event.getPlaetze().size(),
+                                countVerfuegbar(event.getPlaetze()))
                 )
                 .collect(Collectors.toList());
     }

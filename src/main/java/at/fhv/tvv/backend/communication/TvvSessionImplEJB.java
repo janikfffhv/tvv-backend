@@ -1,6 +1,5 @@
 package at.fhv.tvv.backend.communication;
 
-import at.fhv.tvv.backend.application.TvvSessionImpl;
 import at.fhv.tvv.backend.interfaces.TvvSessionInt;
 import at.fhv.tvv.shared.dto.WarenkorbZeileDTO;
 import at.fhv.tvv.shared.ejb.TvvSession;
@@ -8,7 +7,6 @@ import at.fhv.tvv.shared.ejb.TvvSession;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateful;
-import java.rmi.RemoteException;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +42,11 @@ public class TvvSessionImplEJB implements TvvSession {
     }
 
     @Override
+    public void setBenutzerName(String name) {
+        tvvSession.setBenutzerName(name);
+    }
+
+    @Override
     public void hinzufuegen(WarenkorbZeileDTO warenkorbZeileDTO) {
         tvvSession.hinzufuegen(warenkorbZeileDTO);
     }
@@ -64,8 +67,18 @@ public class TvvSessionImplEJB implements TvvSession {
     }
 
     @Override
+    public void setRollen(List<String> rollen) {
+        tvvSession.setRollen(rollen);
+    }
+
+    @Override
     public List<String> getTopics() {
         return tvvSession.getTopics();
+    }
+
+    @Override
+    public void setTopics(List<String> topics) {
+        tvvSession.setTopics(topics);
     }
 
     @Override
@@ -74,23 +87,8 @@ public class TvvSessionImplEJB implements TvvSession {
     }
 
     @Override
-    public void setBenutzerName(String name) {
-        tvvSession.setBenutzerName(name);
-    }
-
-    @Override
     public void hinzufuegenZahlungsMethode(String s) {
         tvvSession.hinzufuegenZahlungsMethode(s);
 
-    }
-
-    @Override
-    public void setRollen(List<String> rollen) {
-        tvvSession.setRollen(rollen);
-    }
-
-    @Override
-    public void setTopics(List<String> topics) {
-        tvvSession.setTopics(topics);
     }
 }

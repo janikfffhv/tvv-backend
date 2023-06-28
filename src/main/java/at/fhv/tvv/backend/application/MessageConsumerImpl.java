@@ -36,7 +36,7 @@ public class MessageConsumerImpl implements MessageConsumerInt {
 
     @Override
     public List<MessageDTO> getMessages(String s) throws JMSException {
-       List<MessageDTO> messages = new ArrayList<>();
+        List<MessageDTO> messages = new ArrayList<>();
         try {
             connection = (ActiveMQConnection) HibernateService.activeMQConnectionFactory().createConnection();
             connection.setClientID("client");
@@ -44,22 +44,22 @@ public class MessageConsumerImpl implements MessageConsumerInt {
             session = (ActiveMQSession) connection.createSession(false, ActiveMQSession.CLIENT_ACKNOWLEDGE);
             List<TextMessage> textMessageList = new ArrayList<>();
             Optional<Angestellte> angestellter = eventRepository.getAngestellerById(s);
-            if(angestellter.isEmpty()) {
+            if (angestellter.isEmpty()) {
                 connection.close();
                 throw new IllegalArgumentException("Angestellter konnte nicht gefunden werden!");
             }
-            for(Kategorie kat : angestellter.get().getTopics()) {
+            for (Kategorie kat : angestellter.get().getTopics()) {
                 Topic topic = session.createTopic(kat.getName());
-                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
+                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername() + topic.getTopicName());
                 Message message;
-                while((message = topicSubscriber.receiveNoWait()) != null) {
+                while ((message = topicSubscriber.receiveNoWait()) != null) {
                     textMessageList.add((TextMessage) message);
 
                 }
                 topicSubscriber.close();
             }
             Collections.reverse(textMessageList);
-            for(TextMessage messageToDTO : textMessageList) {
+            for (TextMessage messageToDTO : textMessageList) {
                 messages.add(new MessageDTO(messageToDTO.getStringProperty("topic"), messageToDTO.getStringProperty("title"), messageToDTO.getText(), messageToDTO.getJMSMessageID()));
             }
             session.close();
@@ -70,6 +70,7 @@ public class MessageConsumerImpl implements MessageConsumerInt {
         }
         return messages;
     }
+
     @Override
     public boolean acknowledgeMessage(String userName, String id) throws JMSException {
         try {
@@ -78,18 +79,18 @@ public class MessageConsumerImpl implements MessageConsumerInt {
             connection.start();
             session = (ActiveMQSession) connection.createSession(false, ActiveMQSession.INDIVIDUAL_ACKNOWLEDGE);
             Optional<Angestellte> angestellter = eventRepository.getAngestellerById(userName);
-            if(angestellter.isEmpty()) {
+            if (angestellter.isEmpty()) {
                 connection.close();
                 throw new IllegalArgumentException("Angestellter konnte nicht gefunden werden!");
             }
             System.out.println("ACKNOWLEDGEMENT" + userName + ", ID: " + id);
-            for(Kategorie kat : angestellter.get().getTopics()) {
+            for (Kategorie kat : angestellter.get().getTopics()) {
                 Topic topic = session.createTopic(kat.getName());
                 Message message;
-                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
-                while((message = topicSubscriber.receiveNoWait()) != null) {
+                TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername() + topic.getTopicName());
+                while ((message = topicSubscriber.receiveNoWait()) != null) {
                     TextMessage message1 = (TextMessage) message;
-                    if(message1.getJMSMessageID().equals(id)) {
+                    if (message1.getJMSMessageID().equals(id)) {
                         System.out.println("ACKNOWLEDGMENT MESSAGE: " + message1.getText());
                         message1.acknowledge();
                     }

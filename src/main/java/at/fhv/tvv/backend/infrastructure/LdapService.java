@@ -57,7 +57,6 @@ public class LdapService implements LdapServiceInt {
         }
 
 
-
         return "FALSE";
 
     }

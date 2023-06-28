@@ -1,4 +1,5 @@
 package at.fhv.tvv.backend.domain.model.veranstaltungsort;
+
 import javax.persistence.*;
 
 @Entity

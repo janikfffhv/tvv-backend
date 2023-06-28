@@ -12,6 +12,7 @@ public class RolesTopicsEJB implements RolesTopics {
 
     @EJB
     private RolesTopicsInt rolesTopics;
+
     @Override
     public List<String> getRoles(String userId) {
         return rolesTopics.getRoles(userId);

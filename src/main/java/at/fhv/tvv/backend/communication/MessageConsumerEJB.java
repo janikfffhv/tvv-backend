@@ -13,6 +13,7 @@ import java.util.List;
 public class MessageConsumerEJB implements MessageConsumer {
     @EJB
     private MessageConsumerInt messageConsumer;
+
     @Override
     public List<MessageDTO> getMessages(String userName) {
         try {

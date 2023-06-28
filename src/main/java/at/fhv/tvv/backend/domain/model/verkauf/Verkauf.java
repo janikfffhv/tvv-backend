@@ -4,7 +4,6 @@ import at.fhv.tvv.backend.domain.model.platz.Platz;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,7 +20,7 @@ public class Verkauf {
 
     private float erstattungsbetrag;
 
-    @OneToMany(mappedBy="verkauf")
+    @OneToMany(mappedBy = "verkauf")
     private List<Platz> plaetze = new ArrayList<>();
 
     private UUID kundenId;
@@ -79,7 +78,9 @@ public class Verkauf {
         return angestellter;
     }
 
-    public List<Platz> getPlaetze() { return plaetze; }
+    public List<Platz> getPlaetze() {
+        return plaetze;
+    }
 
     public void addPlatz(Platz platz) {
         plaetze.add(platz);

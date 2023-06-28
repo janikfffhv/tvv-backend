@@ -2,12 +2,9 @@ package at.fhv.tvv.backend.communication;
 
 import at.fhv.tvv.backend.interfaces.VerkaufInt;
 import at.fhv.tvv.shared.dto.VerkaufDTO;
-import at.fhv.tvv.shared.rmi.Verkauf;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 
 @Stateless
 public class VerkaufImplEJB implements at.fhv.tvv.shared.ejb.Verkauf {
@@ -20,6 +17,6 @@ public class VerkaufImplEJB implements at.fhv.tvv.shared.ejb.Verkauf {
 
     @Override
     public boolean kaufe(VerkaufDTO verkaufDTO) {
-            return verkauf.kaufe(verkaufDTO);
+        return verkauf.kaufe(verkaufDTO);
     }
 }

@@ -12,6 +12,7 @@ import javax.ejb.Stateless;
 import java.rmi.Naming;
 import java.util.List;
 import java.util.UUID;
+
 @Stateless
 public class CustomerSearchTicketsImpl implements CustomerTicketsInt {
     @EJB

@@ -9,8 +9,12 @@ public enum Kategorie {
 
     private final String name;
 
-    Kategorie(String name) {this.name = name;}
+    Kategorie(String name) {
+        this.name = name;
+    }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
 }

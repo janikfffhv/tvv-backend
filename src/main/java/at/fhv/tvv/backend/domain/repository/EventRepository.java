@@ -11,19 +11,21 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface EventRepository {
-    List<Event> searchByString (String searchString);
-    List<Event> searchByDate (int searchDate1, int SearchDate2);
-    List<Event> searchByCategory (String searchString);
+    List<Event> searchByString(String searchString);
 
-    Platz searchByPlatzId (int PlatzId);
+    List<Event> searchByDate(int searchDate1, int SearchDate2);
 
-    List<CustomerEventDTO> getCustomerTickets (UUID kundenUUID);
+    List<Event> searchByCategory(String searchString);
 
-    Event searchById (int eventId);
+    Platz searchByPlatzId(int PlatzId);
+
+    List<CustomerEventDTO> getCustomerTickets(UUID kundenUUID);
+
+    Event searchById(int eventId);
 
     Optional<Angestellte> getAngestellerById(String userid);
 
-    void purchase (Verkauf verkauf);
+    void purchase(Verkauf verkauf);
 
     void updateAngestellter(Angestellte angestellter);
 }

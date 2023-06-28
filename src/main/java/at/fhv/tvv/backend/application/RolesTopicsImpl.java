@@ -30,35 +30,35 @@ public class RolesTopicsImpl implements RolesTopicsInt {
     public List<String> getRoles(String s) {
         List<String> roles = new ArrayList<>();
         Optional<Angestellte> angestellter = eventRepository.getAngestellerById(s);
-        if(angestellter.isPresent()) {
-        for(Rolle rolle:angestellter.get().getRollen()) {
-            roles.add(rolle.getName());
-        }
+        if (angestellter.isPresent()) {
+            for (Rolle rolle : angestellter.get().getRollen()) {
+                roles.add(rolle.getName());
+            }
 
-    }
+        }
         return roles;
     }
 
     @Override
     public List<String> getTopics(String username) {
-            List<String> topics = new ArrayList<>();
-            Optional<Angestellte> angestellter2 = eventRepository.getAngestellerById(username);
-            if(angestellter2.isPresent()) {
-                for (Kategorie topic : angestellter2.get().getTopics()) {
-                    topics.add(topic.getName());
-                }
+        List<String> topics = new ArrayList<>();
+        Optional<Angestellte> angestellter2 = eventRepository.getAngestellerById(username);
+        if (angestellter2.isPresent()) {
+            for (Kategorie topic : angestellter2.get().getTopics()) {
+                topics.add(topic.getName());
             }
-                return topics;
+        }
+        return topics;
     }
 
     @Override
     public void setTopics(List<String> list, String username) {
         List<Kategorie> topics = new ArrayList<>();
-        for(String topic:list) {
+        for (String topic : list) {
             topics.add(Kategorie.valueOf(topic.toUpperCase()));
         }
         Optional<Angestellte> angestellter = eventRepository.getAngestellerById(username);
-        if(angestellter.isPresent()) {
+        if (angestellter.isPresent()) {
             Angestellte angestellter2 = angestellter.get();
             angestellter2.setTopics(topics);
             eventRepository.updateAngestellter(angestellter2);

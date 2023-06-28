@@ -8,7 +8,6 @@ import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Kategorie;
 import at.fhv.tvv.backend.domain.model.verkauf.Verkauf;
 import at.fhv.tvv.backend.domain.repository.EventRepository;
 import at.fhv.tvv.shared.dto.CustomerEventDTO;
-import at.fhv.tvv.shared.dto.CustomerInfoDTO;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -62,7 +61,7 @@ public class EventRepositoryImpl implements EventRepository {
                 .setParameter(1, customerUuid)
                 .getResultList();
         List<CustomerEventDTO> customerListe = new ArrayList<>();
-        for(Verkauf verkauf:verkaufListe) {
+        for (Verkauf verkauf : verkaufListe) {
             CustomerEventDTO event = new CustomerEventDTO(verkauf.getVerkaufsId(), verkauf.getVerkaufszeit(), verkauf.getZahlungsmethode().toString(), verkauf.getGesamtpreis());
             customerListe.add(event);
         }
@@ -97,18 +96,6 @@ public class EventRepositoryImpl implements EventRepository {
             e.printStackTrace();
         }
         List<Platz> plaetze = verkauf.getPlaetze();
-        /**for(Platz platz:plaetze) {
-            try {
-
-                entityManager
-                        .createQuery("UPDATE Platz p SET p.verkauf=(?1) WHERE p.platzId=(?2)")
-                        .setParameter(1, verkauf)
-                        .setParameter(2, platz.getPlatzId())
-                        .executeUpdate();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }**/
     }
 
 

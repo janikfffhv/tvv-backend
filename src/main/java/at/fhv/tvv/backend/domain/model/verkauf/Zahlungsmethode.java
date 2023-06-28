@@ -8,7 +8,11 @@ public enum Zahlungsmethode {
 
     private final String name;
 
-    Zahlungsmethode(String name) {this.name = name;}
+    Zahlungsmethode(String name) {
+        this.name = name;
+    }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 }

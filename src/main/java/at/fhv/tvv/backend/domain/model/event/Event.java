@@ -6,7 +6,6 @@ import at.fhv.tvv.backend.domain.model.veranstaltungsserie.Veranstaltungsserie;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -30,7 +29,7 @@ public class Event {
     @ManyToOne
     private Veranstaltungsort veranstaltungsort;
 
-    @OneToMany(mappedBy="event")
+    @OneToMany(mappedBy = "event")
     private List<Platz> plaetze = new ArrayList<>();
 
 
