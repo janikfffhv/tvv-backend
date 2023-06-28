@@ -43,13 +43,11 @@ public class MessageConsumerImpl implements MessageConsumerInt {
             connection.start();
             session = (ActiveMQSession) connection.createSession(false, ActiveMQSession.CLIENT_ACKNOWLEDGE);
             List<TextMessage> textMessageList = new ArrayList<>();
-            System.out.println(s);
             Optional<Angestellte> angestellter = eventRepository.getAngestellerById(s);
             if(angestellter.isEmpty()) {
                 connection.close();
                 throw new IllegalArgumentException("Angestellter konnte nicht gefunden werden!");
             }
-            System.out.println("LÄUFT!!!" + s);
             for(Kategorie kat : angestellter.get().getTopics()) {
                 Topic topic = session.createTopic(kat.getName());
                 TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
@@ -91,7 +89,6 @@ public class MessageConsumerImpl implements MessageConsumerInt {
                 TopicSubscriber topicSubscriber = session.createDurableSubscriber(topic, angestellter.get().getBenutzername()+topic.getTopicName());
                 while((message = topicSubscriber.receiveNoWait()) != null) {
                     TextMessage message1 = (TextMessage) message;
-                    System.out.println(message1.getJMSMessageID());
                     if(message1.getJMSMessageID().equals(id)) {
                         System.out.println("ACKNOWLEDGMENT MESSAGE: " + message1.getText());
                         message1.acknowledge();

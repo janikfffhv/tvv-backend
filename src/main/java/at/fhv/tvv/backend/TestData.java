@@ -36,7 +36,6 @@ public class TestData {
     private static final List<Platz> plaetze = new ArrayList<>();
     private static final List<Angestellte> angestellte = new ArrayList<>();
     public static void main(String[] args) throws RemoteException, JMSException {
-        System.out.println("Starting generation!");
         generate();
     }
 

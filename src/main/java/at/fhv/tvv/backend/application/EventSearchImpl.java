@@ -31,7 +31,6 @@ public class EventSearchImpl implements EventSearchInt {
     public int countVerfuegbar(List<Platz> plaetze) {
         int count = 0;
         for(Platz platz:plaetze) {
-            System.out.println(platz.getVerkauf());
             if(platz.getVerkauf()==null) {
                 count++;
             }
@@ -54,7 +53,6 @@ public class EventSearchImpl implements EventSearchInt {
 
     @Override
     public List<EventSearchDTO> searchByString(String searchString) {
-        System.out.println("Gegebener String: " + searchString);
         return eventRepository
                 .searchByString(searchString)
                 .stream()
@@ -106,7 +104,6 @@ public class EventSearchImpl implements EventSearchInt {
     @Override
 
     public EventDescriptionDTO searchById(int eventId) {
-        System.out.println("Gesucht nach: " + eventId);
         Event event = eventRepository.searchById(eventId);
         return new EventDescriptionDTO(event.getEventId(),
                 event.getName(),

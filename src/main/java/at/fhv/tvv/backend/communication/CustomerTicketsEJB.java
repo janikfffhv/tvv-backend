@@ -18,7 +18,6 @@ public class CustomerTicketsEJB implements at.fhv.tvv.shared.ejb.CustomerTickets
 
     @Override
     public CustomerInfoDTO searchById(UUID uuid) {
-        System.out.println("Ist hier!");
         try {
             return customerSearchTickets.searchById(uuid);
         } catch (Exception e) {

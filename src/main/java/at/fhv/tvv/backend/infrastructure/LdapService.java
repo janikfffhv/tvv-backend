@@ -43,14 +43,10 @@ public class LdapService implements LdapServiceInt {
                 Attributes attrs = searchResult.getAttributes();
                 Attribute cnAttr = attrs.get("cn");
                 Attribute sn = attrs.get("sn");
-                System.out.println(cnAttr);
                 String cn = (String) cnAttr.get();
                 Attribute pw = attrs.get("userPassword");
                 Attribute desc = attrs.get("description");
-                System.out.println(pw);
                 System.out.println(" cn " + cn);
-                System.out.printf(" pw " + pw);
-                System.out.println("Description " + desc);
                 return desc.get().toString();
             }
 
