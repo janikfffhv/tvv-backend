@@ -67,7 +67,7 @@ public class TestData {
 
 
         //Veranstaltungsserien
-        Veranstaltungsserie sotw = new Veranstaltungsserie("Superstars of the world", "Hier könnte Ihre Werbung stehen!", Kategorie.KONZERT, "FH Vorarlberg GmbH");
+        Veranstaltungsserie sotw = new Veranstaltungsserie("Superstars of the world", "Hier k&ouml;nnte Ihre Werbung stehen!", Kategorie.KONZERT, "FH Vorarlberg GmbH");
         veranstaltungsserien.add(sotw);
         Veranstaltungsserie mc = new Veranstaltungsserie("Mozart-Classics", "Die glorreichsten Mozart-Stuecke jetzt in Feldkirch!", Kategorie.KONZERT, "Musica AG");
         veranstaltungsserien.add(mc);
@@ -108,11 +108,11 @@ public class TestData {
         int datum12 = (int) (new Date("16/11/2023").getTime()/1000);
         int datum13 = (int) (new Date("13/12/2023").getTime()/1000);
 
-        Event event1 = new Event(1006, "Bruce Springsteen Konzert", sotw, "Hier könnte Ihre Werbung stehen!", 1682002800, bludenz1);
+        Event event1 = new Event(1006, "Bruce Springsteen Konzert", sotw, "Hier k&oumlnnte Ihre Werbung stehen!", 1682002800, bludenz1);
         Event event2 = new Event(1007, "Requiem", mc, "Requiem - Das klassische Stueck aufgefuehrt in Feldkirch!", datum1, feldkirch1);
         Event event3 = new Event(1008, "404 - Die Fehler in unserer Realitaet", vnv, "Die kurioseste IT-verseuchteste romantische-Komoedie ueberhaupt!", datum2, feldkirch2);
         Event event4 = new Event(1009, "Dungeons & Dragons: Ehre unter Dieben", dad, "Kinovorstellung Nr. 1 in Hohenems", datum3, hohenems1);
-        Event event5 = new Event(1010, "Enterprise Applikationen - The Movie", fhd, "Viele Vorlesungen - EIN GANZER FILM.", datum1, dornbirn1);
+        Event event5 = new Event(1010, "Enterprise Applikationen - The Movie", fhd, "Viele Vorlesungen - EIN GANZER FILM.", 1702166400, dornbirn1);
         Event event6 = new Event(1011, "Die Zauberfloete fuer Kinder", zfk, "Ein Klassiker neu aufgefuehrt!", datum4, bregenz1);
         Event event7 = new Event(1012, "KRIEG", tas, "Die Geschichte der Kriegsverläufe umgekehrt: Was waere, wenn er bei uns waere?", datum5, feldkirch2);
         Event event8 = new Event(1013, "Theater Patati-Patata präsentiert: Alex und die gelbe Maus", tas, "Eine Mäusegeschichte über echte Freundschaft und den großen Wunsch, geliebt zu werden.", datum6, feldkirch2);

@@ -19,10 +19,13 @@
             <!-- <property name="hibernate.hbm2ddl.auto" value="create"/> -->
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.connection.CharSet" value="UTF-8"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="show_sql" value="true"/>
 
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.0.40.167:5432/teamd_production"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://10.0.40.167:5432/teamd_production?characterEncoding=UTF-8"/>
             <property name="javax.persistence.jdbc.user" value="teamd"/>
             <property name="javax.persistence.jdbc.password" value="TeamSpirit23!"/>
         </properties>

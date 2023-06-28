@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-@Path("/verkauf")
+@Path("/api/teamd/verkauf")
 public class VerkaufRest {
 
     @EJB

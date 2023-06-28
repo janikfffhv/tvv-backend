@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.*;
 
-@Path("/login")
+@Path("/api/teamd/login")
 public class LoginRest {
 
     @EJB

@@ -58,7 +58,6 @@
         <version>2.0</version>
     </dependency>
 
-
     <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-annotations</artifactId>
@@ -105,8 +104,8 @@
         <groupId>org.microprofile-ext.openapi-ext</groupId>
         <artifactId>openapi-ui</artifactId>
         <version>1.1.5</version>
+        <scope>runtime</scope>
     </dependency>
-
     <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
@@ -120,7 +119,6 @@
         <version>5.3.1</version>
         <scope>test</scope>
     </dependency>
-
 </dependencies>
     <build>
         <plugins>
@@ -132,6 +130,7 @@
                     <archive>
                         <manifestEntries>
                             <Dependencies>org.slf4j</Dependencies>
+                            <OpenAPI-Host>${project.build.finalName}</OpenAPI-Host>
                         </manifestEntries>
                     </archive>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
